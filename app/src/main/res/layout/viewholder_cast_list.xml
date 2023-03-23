@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_medium"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivCircleCast"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/caster" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivCircleCast"
+        android:layout_marginTop="@dimen/margin_medium"
+        tools:background="@color/black"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/inter_light"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Tom Hardy"/>
+
+
+</RelativeLayout>
