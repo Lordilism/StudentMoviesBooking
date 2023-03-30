@@ -5,9 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable/back.xml" value="0.11230926513671866" />
         <entry key="app/src/main/res/drawable/backgorund_ns_section.xml" value="0.1035" />
+        <entry key="app/src/main/res/drawable/background_accent_date.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/background_cancelion_policy.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/background_card.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/background_chip.xml" value="0.1265" />
+        <entry key="app/src/main/res/drawable/background_date.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/background_due_date.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/background_food.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/background_genre.xml" value="0.12" />
@@ -81,6 +83,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_tickets.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.3880096435546875" />
+        <entry key="app/src/main/res/layout/testing.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/view_item_banner.xml" value="0.17314814814814813" />
         <entry key="app/src/main/res/layout/viewholder_cast_list.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/viewholder_cinema_date.xml" value="0.25677083333333334" />

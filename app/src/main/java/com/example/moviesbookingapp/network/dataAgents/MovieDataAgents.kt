@@ -51,4 +51,9 @@ interface MovieDataAgents {
         onSuccess: (List<CinemaVO>) -> Unit,
         onFailure: (String) -> Unit
     )
+
+   fun getConfig(
+       onSuccess: (List<ConfigVO>) -> Unit,
+       onFailure: (String) -> Unit
+   )
 }

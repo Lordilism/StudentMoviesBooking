@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.moviesbookingapp.R
 import com.example.moviesbookingapp.data.models.MovieModel
 import com.example.moviesbookingapp.data.models.MovieModelImpl
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_get_otpactivity.*
 
 class GetOTPActivity : AppCompatActivity() {
@@ -58,7 +59,8 @@ class GetOTPActivity : AppCompatActivity() {
             if (EnteredOTP == "123456") {
                 mMovieModel.signInOTP(
                     onSuccess = {
-                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, it.token, Toast.LENGTH_SHORT).show()
+
                         startActivity(PickLocationActivity.newIntent(this))
                     },
                     onFailure = {

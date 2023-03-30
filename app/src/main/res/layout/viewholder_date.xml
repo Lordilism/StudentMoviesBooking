@@ -4,13 +4,14 @@
     android:layout_height="100dp"
     android:layout_marginStart="@dimen/margin_medium"
     android:layout_marginTop="@dimen/margin_medium"
+    android:id="@+id/dateSlot"
     android:layout_marginEnd="@dimen/margin_medium">
 
     <View
+        android:id="@+id/dateSlotColor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:backgroundTint="@color/colorAccent"
         android:background="@drawable/placeholder_date" />
 
     <RelativeLayout
@@ -26,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_light"
-            android:text="Today"
             android:gravity="center_horizontal"
+            android:text="Today"
             android:textColor="@color/black"
             android:textSize="@dimen/text_small"
             android:textStyle="bold" />

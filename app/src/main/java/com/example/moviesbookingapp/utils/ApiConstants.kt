@@ -14,4 +14,6 @@ const val API_MOVIES_DETAILS = "/api/v1/movies"
 
 const val API_CINEMA_TIMESLOT = "/api/v2/cinema-day-timeslots"
 
-const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w400"
+const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w200"
+
+const val API_CONFIG = "/api/v2/configurations"

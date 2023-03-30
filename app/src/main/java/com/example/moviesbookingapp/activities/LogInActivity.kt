@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.moviesbookingapp.R
 import com.example.moviesbookingapp.data.models.MovieModel
 import com.example.moviesbookingapp.data.models.MovieModelImpl
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_log_in.*
 
 class LogInActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class LogInActivity : AppCompatActivity() {
             mMovieModel.getOtp(
 
                 onSuccess = {
-                    Toast.makeText(this, it.message,Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, it.message,Toast.LENGTH_SHORT).show()
 
                     startActivity(GetOTPActivity.newIntent(this,edtPhoneNumber.text.toString()))
                 },

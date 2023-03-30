@@ -22,7 +22,6 @@ class NowShowingFragment(val mMovieModel: MovieModel) : Fragment(), MoviesDelega
 
 //    private var mMovieModel: MovieModel = MovieModelImpl
     lateinit var mNowShowingAdapter: NowShowingAdapter
-    private var mNowShowingMovie: List<MovieVO> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

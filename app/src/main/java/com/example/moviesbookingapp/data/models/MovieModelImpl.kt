@@ -1,12 +1,21 @@
 package com.example.moviesbookingapp.data.models
 
+import android.content.Context
 import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.dataAgents.MovieDataAgents
 import com.example.moviesbookingapp.network.dataAgents.RetrofitDataAgentImpl
 import com.example.moviesbookingapp.network.responses.OtpResponse
+import com.example.moviesbookingapp.persistence.BookingDatabase
 
-object MovieModelImpl: MovieModel {
-    private val mMovieDataAgents:MovieDataAgents = RetrofitDataAgentImpl
+object MovieModelImpl : MovieModel {
+    private var mDatabase: BookingDatabase? = null
+
+    private val mMovieDataAgents: MovieDataAgents = RetrofitDataAgentImpl
+
+    fun initDatabase(context: Context) {
+        mDatabase = BookingDatabase.getDBInstance(context)
+    }
+
     override fun getOtp(
         onSuccess: (OtpResponse) -> Unit,
         onFailure: (String) -> Unit,
@@ -15,9 +24,13 @@ object MovieModelImpl: MovieModel {
         mMovieDataAgents.getOtp(
             onSuccess = onSuccess,
             onFailure = onFailure,
-            phoneNo =phoneNo
+            phoneNo = phoneNo
 
         )
+    }
+
+    override fun getOtp(code: Int): OtpResponse? {
+        return mDatabase?.bookingDao()?.getInformation(code)
     }
 
     override fun signInOTP(
@@ -26,8 +39,14 @@ object MovieModelImpl: MovieModel {
         phoneNo: String,
         otp: String
     ) {
+        //Database
+
+        //Network
         mMovieDataAgents.signInOTP(
-            onSuccess = onSuccess,
+            onSuccess = {
+                mDatabase?.bookingDao()?.insertInformation(it)
+                onSuccess(it)
+            },
             onFailure = onFailure,
             phoneNo = phoneNo,
             otp = otp
@@ -35,17 +54,30 @@ object MovieModelImpl: MovieModel {
         )
     }
 
-    override fun getCities(onSuccess: (List<CityVo>) -> Unit, onFailure: (String) -> Unit) {
+    override fun insertCities(onSuccess: (List<CityVo>) -> Unit, onFailure: (String) -> Unit) {
         mMovieDataAgents.getCities(
-            onSuccess= onSuccess,
+            onSuccess = {
+                mDatabase?.bookingDao()?.insertCities(it)
+                onSuccess(it)
+            },
             onFailure = onFailure
         )
     }
 
+    override fun getCities(): List<CityVo>? {
+        return mDatabase?.bookingDao()?.getCities()
+    }
+
     override fun getBanner(onSuccess: (List<BannerVO>) -> Unit, onFailure: (String) -> Unit) {
+
+        onSuccess(mDatabase?.bookingDao()?.getBanner() ?: listOf())
+
         mMovieDataAgents.getBanner(
-            onSuccess=onSuccess,
-            onFailure =onFailure
+            onSuccess = {
+                mDatabase?.bookingDao()?.insertBanners(it)
+                onSuccess(it)
+            },
+            onFailure = onFailure
         )
     }
 
@@ -53,33 +85,41 @@ object MovieModelImpl: MovieModel {
         onSuccess: (List<MovieVO>) -> Unit,
         onFailure: (String) -> Unit,
 
-    ) {
+        ) {
+        //DataBase
+        onSuccess(mDatabase?.bookingDao()?.getMoviesByType(NOW_PLAYING) ?: listOf())
+
         mMovieDataAgents.getNowPlayingMovies(
-            onSuccess={
-                for (nowShowing in it){
+            onSuccess = {
+                for (nowShowing in it) {
                     nowShowing.type = NOW_PLAYING
                 }
+                mDatabase?.bookingDao()?.insertMovies(it)
                 onSuccess(it)
             },
-            onFailure=onFailure,
+            onFailure = onFailure,
 
-        )
+            )
     }
 
     override fun getComingSoon(
         onSuccess: (List<MovieVO>) -> Unit,
         onFailure: (String) -> Unit,
 
-    ) {
+        ) {
+        //DataBase
+        onSuccess(mDatabase?.bookingDao()?.getMoviesByType(COMING_SOON) ?: listOf())
+
         mMovieDataAgents.getComingSoonMovies(
-            onSuccess={
-                    for(comingSoon in it){
-                        comingSoon.type = COMING_SOON
-                    }
+            onSuccess = {
+                for (comingSoon in it) {
+                    comingSoon.type = COMING_SOON
+                }
+                mDatabase?.bookingDao()?.insertMovies(it)
                 onSuccess(it)
 
             },
-            onFailure={
+            onFailure = {
                 onFailure(it)
             }
         )
@@ -90,8 +130,12 @@ object MovieModelImpl: MovieModel {
         onFailure: (String) -> Unit,
         movieId: String
     ) {
+        mDatabase?.bookingDao()?.getMoviesById(movieId.toInt())?.let { onSuccess(it) }
         mMovieDataAgents.getMovieDetails(
-            onSuccess = onSuccess,
+            onSuccess = {
+                mDatabase?.bookingDao()?.getMoviesById(movieId.toInt())
+                onSuccess(it)
+            },
             onFailure = onFailure,
             movieId
         )
@@ -109,6 +153,20 @@ object MovieModelImpl: MovieModel {
             onSuccess = onSuccess,
             onFailure = onFailure
         )
+    }
+
+    override fun insertConfig(onSuccess: (List<ConfigVO>) -> Unit, onFailure: (String) -> Unit) {
+        mMovieDataAgents.getConfig(
+            onSuccess = {
+                mDatabase?.bookingDao()?.insertConfig(it)
+                onSuccess(it)
+            },
+            onFailure = onFailure
+        )
+    }
+
+    override fun getConfig(key: String): ConfigVO? {
+        return mDatabase?.bookingDao()?.getConfig(key)
     }
 
 

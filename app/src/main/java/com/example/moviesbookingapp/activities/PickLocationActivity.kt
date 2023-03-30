@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviesbookingapp.R
 import com.example.moviesbookingapp.adapters.CitiesAdapter
-import com.example.moviesbookingapp.adapters.CitiesListAdapter
 import com.example.moviesbookingapp.data.models.MovieModel
 import com.example.moviesbookingapp.data.models.MovieModelImpl
 import com.example.moviesbookingapp.delegates.CitiesDelegate
-import com.example.moviesbookingapp.dummy.Cities
 import kotlinx.android.synthetic.main.activity_pick_location.*
 
 class PickLocationActivity : AppCompatActivity(),CitiesDelegate {
@@ -36,17 +34,11 @@ class PickLocationActivity : AppCompatActivity(),CitiesDelegate {
 
     }
 
-    //Cities from Api
+    //Cities from Database
     private fun requestData() {
-        mMovieModel.getCities(
-            onSuccess = {
-                        mCitiesAdapter.setNewData(it)
-
-            },
-            onFailure = {
-
-            }
-        )
+        mMovieModel.getCities()?.let {
+            mCitiesAdapter.setNewData(it)
+        }
     }
 
     private fun setUpListCities() {

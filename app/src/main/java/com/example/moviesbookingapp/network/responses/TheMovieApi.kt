@@ -59,6 +59,10 @@ interface TheMovieApi {
         date: String
     ):Call<CinemaTimeSlotResponse>
 
+    @GET(API_CONFIG)
+    fun getConfig(
+    ):Call<ConfigResponse>
+
 
 
 

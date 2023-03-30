@@ -1,9 +1,6 @@
 package com.example.moviesbookingapp.data.models
 
-import com.example.moviesbookingapp.data.vos.BannerVO
-import com.example.moviesbookingapp.data.vos.CinemaVO
-import com.example.moviesbookingapp.data.vos.CityVo
-import com.example.moviesbookingapp.data.vos.MovieVO
+import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.responses.OtpResponse
 
 interface MovieModel {
@@ -20,11 +17,15 @@ interface MovieModel {
         otp: String
     )
 
-    fun getCities(
+    fun getOtp(code:Int):OtpResponse?
+
+    fun insertCities(
         onSuccess: (List<CityVo>) -> Unit,
         onFailure: (String) -> Unit,
 
         )
+
+    fun getCities():List<CityVo>?
 
     fun getBanner(
         onSuccess: (List<BannerVO>) -> Unit,
@@ -53,4 +54,11 @@ interface MovieModel {
         onSuccess: (List<CinemaVO>) -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun insertConfig(
+        onSuccess: (List<ConfigVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getConfig(key:String):ConfigVO?
 }

@@ -1,37 +1,59 @@
 package com.example.moviesbookingapp.data.vos
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.moviesbookingapp.persistence.typeconverters.CasterVoListTypeConverter
+import com.example.moviesbookingapp.persistence.typeconverters.GenreListTypeConverter
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
-
+@Entity(tableName = "movie")
+@TypeConverters(
+    GenreListTypeConverter::class,
+    CasterVoListTypeConverter::class
+)
 data class MovieVO(
     @SerializedName("id")
+    @PrimaryKey
     val id: Long?,
 
     @SerializedName("original_title")
+    @ColumnInfo(name="original_title")
     val originalTitle: String,
 
     @SerializedName("release_date")
+    @ColumnInfo(name = "release_date")
     val releaseDate: String?,
 
     @SerializedName("genres")
+    @ColumnInfo(name = "genres")
     val genres: List<String>?,
 
     @SerializedName("poster_path")
+    @ColumnInfo(name = "poster_path")
     val posterPath: String?,
 
     @SerializedName("overview")
+    @ColumnInfo(name = "overview")
     val overView: String?,
 
     @SerializedName("rating")
+    @ColumnInfo(name = "rating")
     val rating: Double?,
 
     @SerializedName("runtime")
+    @ColumnInfo(name = "runtime")
     val runTime: Int?,
 
     @SerializedName("casts")
+    @ColumnInfo(name= "casts")
     val casts: List<CastersVO>?,
 
+    @ColumnInfo(name = "type")
     var type: String
+
+
 
 
 ) {

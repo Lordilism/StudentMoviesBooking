@@ -11,11 +11,10 @@
         android:id="@+id/tvShowTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSecondaryText"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/inter_medium"
         android:text="9:30 AM"
-        android:layout_centerHorizontal="true"
-        />
+        android:textColor="@color/colorSecondaryText" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv3d"
         android:layout_width="wrap_content"
@@ -26,16 +25,16 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvShowTime"
         />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSecondaryText"
-        android:fontFamily="@font/inter_medium"
-        android:text="Screen 1"
         android:layout_below="@id/tv3d"
         android:layout_centerHorizontal="true"
-        />
+        android:fontFamily="@font/inter_medium"
+        android:text="Screen 1"
+        android:textColor="@color/colorSecondaryText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"

@@ -1,9 +1,6 @@
 package com.example.moviesbookingapp.network.dataAgents
 
-import com.example.moviesbookingapp.data.vos.BannerVO
-import com.example.moviesbookingapp.data.vos.CinemaVO
-import com.example.moviesbookingapp.data.vos.CityVo
-import com.example.moviesbookingapp.data.vos.MovieVO
+import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.responses.*
 import com.example.moviesbookingapp.utils.BASE_URL
 import okhttp3.OkHttpClient
@@ -12,7 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 object RetrofitDataAgentImpl : MovieDataAgents {
@@ -70,6 +66,7 @@ object RetrofitDataAgentImpl : MovieDataAgents {
             override fun onResponse(call: Call<OtpResponse>, response: Response<OtpResponse>) {
                 if (response.isSuccessful) {
                     response?.body()?.let {
+
                         onSuccess(it)
 
                     }
@@ -132,7 +129,7 @@ object RetrofitDataAgentImpl : MovieDataAgents {
         onSuccess: (List<MovieVO>) -> Unit,
         onFailure: (String) -> Unit,
 
-    ) {
+        ) {
         mTheMovieApi?.getNowPlayingMovies()?.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
@@ -159,7 +156,7 @@ object RetrofitDataAgentImpl : MovieDataAgents {
         onSuccess: (List<MovieVO>) -> Unit,
         onFailure: (String) -> Unit,
 
-    ) {
+        ) {
         mTheMovieApi?.getComingMovies()?.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
@@ -177,7 +174,7 @@ object RetrofitDataAgentImpl : MovieDataAgents {
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                onFailure(t.message?:"")
+                onFailure(t.message ?: "")
             }
 
         })
@@ -188,22 +185,22 @@ object RetrofitDataAgentImpl : MovieDataAgents {
         onFailure: (String) -> Unit,
         movieId: String
     ) {
-        mTheMovieApi?.getMovieDetails(movieId)?.enqueue(object :Callback<MovieDetailsResponse>{
+        mTheMovieApi?.getMovieDetails(movieId)?.enqueue(object : Callback<MovieDetailsResponse> {
             override fun onResponse(
                 call: Call<MovieDetailsResponse>,
                 response: Response<MovieDetailsResponse>
             ) {
-                if (response.isSuccessful){
-                    response.body()?.data?.let{
+                if (response.isSuccessful) {
+                    response.body()?.data?.let {
                         onSuccess(it)
                     }
-                }else{
+                } else {
                     onFailure(response.message())
                 }
             }
 
             override fun onFailure(call: Call<MovieDetailsResponse>, t: Throwable) {
-                onFailure(t.message?:"")
+                onFailure(t.message ?: "")
             }
 
         })
@@ -215,19 +212,44 @@ object RetrofitDataAgentImpl : MovieDataAgents {
         onSuccess: (List<CinemaVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mTheMovieApi?.getCinemaTimeslot(authorization,date)?.enqueue(object :Callback<CinemaTimeSlotResponse>{
-            override fun onResponse(
-                call: Call<CinemaTimeSlotResponse>,
-                response: Response<CinemaTimeSlotResponse>
-            ) {
-                if (response.isSuccessful){
-                    response.body()?.data?.let {
-                        onSuccess(it)
+        mTheMovieApi?.getCinemaTimeslot(authorization, date)
+            ?.enqueue(object : Callback<CinemaTimeSlotResponse> {
+                override fun onResponse(
+                    call: Call<CinemaTimeSlotResponse>,
+                    response: Response<CinemaTimeSlotResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let {
+                            onSuccess(it)
+                        }
                     }
+                }
+
+                override fun onFailure(call: Call<CinemaTimeSlotResponse>, t: Throwable) {
+                    onFailure(t.message ?: "")
+                }
+
+            })
+    }
+
+    override fun getConfig(onSuccess: (List<ConfigVO>) -> Unit, onFailure: (String) -> Unit) {
+        mTheMovieApi?.getConfig()?.enqueue(object : Callback<ConfigResponse> {
+            override fun onResponse(
+                call: Call<ConfigResponse>,
+                response: Response<ConfigResponse>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.data.let {
+                        if (it != null) {
+                            onSuccess(it)
+                        }
+                    }
+                } else {
+                    onFailure(response.message())
                 }
             }
 
-            override fun onFailure(call: Call<CinemaTimeSlotResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ConfigResponse>, t: Throwable) {
                 onFailure(t.message?:"")
             }
 
