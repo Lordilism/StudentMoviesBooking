@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvPriceFromSeatSelect"
         android:layout_toStartOf="@id/tvRowEnd"
+        android:clickable="true"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"

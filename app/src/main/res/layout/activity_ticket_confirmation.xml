@@ -108,6 +108,7 @@
                                 android:orientation="horizontal">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvMovieNameFromConfirm"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/dm_sans"
@@ -170,6 +171,7 @@
                                     android:textStyle="bold" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvCountTickets"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/dm_sans"
@@ -187,13 +189,15 @@
 
 
                         </LinearLayout>
+
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSelectionSeat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="@dimen/margin_medium"
                             android:layout_marginStart="@dimen/margin_medium_2"
                             android:layout_marginTop="8dp"
+                            android:layout_marginBottom="@dimen/margin_medium"
                             android:fontFamily="@font/dm_sans"
                             android:text="Gold-G8,G7"
                             android:textColor="@color/white"
@@ -347,16 +351,17 @@
         </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/margin_medium"
-            android:text="Done"
-            android:textColor="@color/black"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_medium_2"
             android:backgroundTint="@color/colorAccent"
-            android:paddingEnd="@dimen/margin_medium"/>
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="Done"
+            android:textColor="@color/black" />
 
 
     </RelativeLayout>

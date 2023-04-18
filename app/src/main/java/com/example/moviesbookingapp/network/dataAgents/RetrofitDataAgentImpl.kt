@@ -250,6 +250,148 @@ object RetrofitDataAgentImpl : MovieDataAgents {
             }
 
             override fun onFailure(call: Call<ConfigResponse>, t: Throwable) {
+                onFailure(t.message ?: "")
+            }
+
+        })
+    }
+
+    override fun getSeat(
+        authorization: String,
+        dayTimeSlotId: Int,
+        bookingDate: String,
+        onSuccess: (MutableList<MutableList<SeatVO>>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.getSeat(authorization, dayTimeSlotId, bookingDate)
+            ?.enqueue(object : Callback<CinemaGetSeatResponse> {
+                override fun onResponse(
+                    call: Call<CinemaGetSeatResponse>,
+                    response: Response<CinemaGetSeatResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response?.body()?.data.let { seat ->
+                            seat?.let { onSuccess(it) }
+
+                        }
+
+                    } else {
+                        onFailure(response.message())
+                    }
+
+                }
+
+                override fun onFailure(call: Call<CinemaGetSeatResponse>, t: Throwable) {
+                    onFailure(t.message ?: "")
+                }
+
+            })
+    }
+
+    override fun getSnack(
+        authorization: String,
+        categoryId: Int,
+        onSuccess: (List<SnackVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.getSnack(authorization, categoryId)
+            ?.enqueue(object : Callback<SnackResponse> {
+                override fun onResponse(
+                    call: Call<SnackResponse>,
+                    response: Response<SnackResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let {
+                            onSuccess(it)
+                        }
+
+                    } else {
+                        onFailure(response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<SnackResponse>, t: Throwable) {
+                    onFailure(t.message ?: "")
+                }
+
+            })
+    }
+
+    override fun getSnackCategory(
+        authorization: String,
+        onSuccess: (List<SnackCategoryVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.getSnackCategory(authorization)?.enqueue(object :Callback<SnackCategoryResponse>{
+            override fun onResponse(
+                call: Call<SnackCategoryResponse>,
+                response: Response<SnackCategoryResponse>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        onSuccess(it.data)
+                    }
+                }else{
+                    onFailure(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<SnackCategoryResponse>, t: Throwable) {
+                onFailure(t.message?:"")
+            }
+
+        })
+    }
+
+    override fun getPayment(
+        authorization: String,
+        onSuccess: (List<PaymentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.getPayement(authorization)?.enqueue(object :Callback<PaymentTypeResponse>{
+            override fun onResponse(
+                call: Call<PaymentTypeResponse>,
+                response: Response<PaymentTypeResponse>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        it.data?.let { paymentList -> onSuccess(paymentList) }
+                    }
+                }else{
+                    onFailure(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<PaymentTypeResponse>, t: Throwable) {
+                onFailure(t.message?:"")
+            }
+
+        })
+    }
+
+    override fun getTicketCheckout(
+        authorization: String,
+        ticketCheckout: CheckOutBody,
+        onSuccess: (TicketCheckOutVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.getCheckOut(authorization,ticketCheckout)?.enqueue(object :Callback<CheckOutResponse>{
+            override fun onResponse(
+                call: Call<CheckOutResponse>,
+                response: Response<CheckOutResponse>
+            ) {
+
+                if (response.isSuccessful){
+                    response.body()?.data?.let{
+                        onSuccess(it)
+                    }
+                }else{
+                    onFailure(response.message())
+                }
+
+            }
+
+            override fun onFailure(call: Call<CheckOutResponse>, t: Throwable) {
                 onFailure(t.message?:"")
             }
 

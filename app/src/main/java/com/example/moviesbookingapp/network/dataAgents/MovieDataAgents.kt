@@ -56,4 +56,39 @@ interface MovieDataAgents {
        onSuccess: (List<ConfigVO>) -> Unit,
        onFailure: (String) -> Unit
    )
+
+   fun getSeat(
+       authorization:String,
+       dayTimeSlotId:Int,
+       bookingDate:String,
+       onSuccess:(MutableList<MutableList<SeatVO>>) -> Unit,
+       onFailure:(String) -> Unit
+   )
+
+   fun getSnack(
+       authorization: String,
+       categoryId:Int,
+       onSuccess: (List<SnackVO>) -> Unit,
+       onFailure: (String) -> Unit
+
+   )
+
+   fun getSnackCategory(
+       authorization: String,
+       onSuccess: (List<SnackCategoryVO>) -> Unit,
+       onFailure: (String) -> Unit
+   )
+
+   fun getPayment(
+       authorization: String,
+       onSuccess: (List<PaymentVO>) -> Unit,
+       onFailure: (String) -> Unit
+   )
+
+    fun getTicketCheckout(
+        authorization:String,
+        ticketCheckout: CheckOutBody,
+        onSuccess:(TicketCheckOutVO) -> Unit,
+        onFailure:(String) -> Unit
+    )
 }

@@ -10,9 +10,10 @@ import com.example.moviesbookingapp.data.vos.TimeSlotVO
 import com.example.moviesbookingapp.delegates.DateDelegate
 import com.example.moviesbookingapp.viewholders.ShowTimeViewHolder
 
-class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<TimeSlotColor>) :
+class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<TimeSlotColor>, ) :
     RecyclerView.Adapter<ShowTimeViewHolder>() {
     private var mTimeSlots: List<TimeSlotVO> = listOf()
+    private var mDateString: String? =null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowTimeViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.viewholder_cinema_date, parent, false)
@@ -20,9 +21,9 @@ class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<Ti
     }
 
     override fun onBindViewHolder(holder: ShowTimeViewHolder, position: Int) {
-        if (mTimeSlots.isNotEmpty()) {
-            holder.bindData(mTimeSlots[position])
-        }
+
+            holder.bindData(mTimeSlots[position],mDateString!!)
+
     }
 
     override fun getItemCount(): Int {
@@ -30,8 +31,10 @@ class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<Ti
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setNewData(timeSlot: List<TimeSlotVO>) {
+    fun setNewData(timeSlot: List<TimeSlotVO>, mDateForAPI: String,) {
+
         mTimeSlots = timeSlot
+        mDateString = mDateForAPI
         notifyDataSetChanged()
     }
 }

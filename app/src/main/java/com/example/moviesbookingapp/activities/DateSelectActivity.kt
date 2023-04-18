@@ -15,8 +15,6 @@ import com.example.moviesbookingapp.data.vos.TimeSlotColor
 import com.example.moviesbookingapp.delegates.DateDelegate
 import com.example.moviesbookingapp.delegates.SelectDateDelegate
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.internal.LinkedTreeMap
 import kotlinx.android.synthetic.main.activity_date_select.*
 import java.util.*
 
@@ -24,13 +22,21 @@ class DateSelectActivity : AppCompatActivity(), DateDelegate, SelectDateDelegate
     lateinit var mDateAdapter: DateAdapter
     lateinit var mCinemaDetailsAdapter: CinemaDetailsAdapter
     private var mMovieModel: MovieModel = MovieModelImpl
+    private lateinit var mMovieId: String
     private var isExpanded = false
     private var mcolorList: ArrayList<TimeSlotColor>? = null
+    private lateinit var mMovieNameForCheckout:String
 
     companion object {
         const val CINEMA_TIME_SLOT_STATUS = "cinema_timeslot_status"
-        fun newIntent(context: Context): Intent {
-            return Intent(context, DateSelectActivity::class.java)
+        const val IE_NAME_FOR_CHECKOUT = "IE_NAME_FOR_CHECKOUT"
+        const val IE_MOVIE_ID = "MOVIE_ID"
+        fun newIntent(context: Context, originalTitle: String, id: String): Intent {
+            val intent= Intent(context, DateSelectActivity::class.java)
+            intent.putExtra(IE_NAME_FOR_CHECKOUT,originalTitle)
+            intent.putExtra(IE_MOVIE_ID,id)
+
+            return intent
 
         }
     }
@@ -38,12 +44,15 @@ class DateSelectActivity : AppCompatActivity(), DateDelegate, SelectDateDelegate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_date_select)
+        mMovieNameForCheckout = intent.getStringExtra(IE_NAME_FOR_CHECKOUT).toString()
+        mMovieId = intent.getStringExtra(IE_MOVIE_ID).toString()
+
+
+
+
         NavigateBack()
         setUpDateSelect()
         setUpAboutCinema()
-
-
-
 
 
     }
@@ -75,8 +84,10 @@ class DateSelectActivity : AppCompatActivity(), DateDelegate, SelectDateDelegate
 
     }
 
-    override fun onTapDate() {
-        startActivity(SeatSelectActivity.newIntent(this))
+    override fun onTapDate(cinemaTimeSlotId: Int, bookingDate: String, startTime: String?) {
+        val slotId = cinemaTimeSlotId
+        val date = bookingDate
+        startActivity(SeatSelectActivity.newIntent(this,slotId,date,startTime?:"",mMovieNameForCheckout,mMovieId))
     }
 
     override fun onTapDetails() {
@@ -126,7 +137,7 @@ class DateSelectActivity : AppCompatActivity(), DateDelegate, SelectDateDelegate
         mMovieModel.getCinemaTimeslots(
             "Bearer ${mMovieModel?.getOtp(201)?.token}", param,
             onSuccess = {
-                mCinemaDetailsAdapter.setNewData(it,)
+                mCinemaDetailsAdapter.setNewData(it, param)
             },
             onFailure = {
 

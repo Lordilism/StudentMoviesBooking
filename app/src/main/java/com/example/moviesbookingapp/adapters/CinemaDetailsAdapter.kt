@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.viewholder_cinema_details.view.*
 class CinemaDetailsAdapter(val isExpanded:Boolean,private val delegate:DateDelegate,val context: Context): RecyclerView.Adapter<CinemaDetailsViewHolder>() {
 
     private var mCinemaList: List<CinemaVO> = listOf()
+    private var mDate: String? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CinemaDetailsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_cinema_details,parent,false)
@@ -22,7 +23,7 @@ class CinemaDetailsAdapter(val isExpanded:Boolean,private val delegate:DateDeleg
 
     override fun onBindViewHolder(holder: CinemaDetailsViewHolder, position: Int) {
         if (mCinemaList.isNotEmpty()){
-            holder.bindData(mCinemaList[position])
+            mDate?.let { holder.bindData(mCinemaList[position], it) }
 
         }
     }
@@ -32,8 +33,9 @@ class CinemaDetailsAdapter(val isExpanded:Boolean,private val delegate:DateDeleg
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setNewData(cinemaList: List<CinemaVO>){
+    fun setNewData(cinemaList: List<CinemaVO>,date: String){
         mCinemaList = cinemaList
+        mDate = date
         notifyDataSetChanged()
     }
 

@@ -22,6 +22,7 @@ class CinemaDetailsViewHolder(
     lateinit var mShowTimeAdapter: ShowTimeAdapter
     private var mCinema: CinemaVO? = null
     private var mMovieModel = MovieModelImpl
+    private var mDateForAPI = ""
 
 
     private var color: LinkedTreeMap<Int, String> = LinkedTreeMap<Int, String>()
@@ -38,6 +39,7 @@ class CinemaDetailsViewHolder(
         setUpRecyclerViewTime(data as ArrayList<TimeSlotColor>)
         itemView.setOnClickListener {
             setUpVisibilityOfLayout()
+
         }
         itemView.tvSeeDetals.setOnClickListener {
             delegate.onTapDetails()
@@ -61,11 +63,12 @@ class CinemaDetailsViewHolder(
 
     }
 
-    fun bindData(cinema: CinemaVO) {
+    fun bindData(cinema: CinemaVO, date:String) {
         mCinema = cinema
+        mDateForAPI = date
 
         cinema.timeSlots?.let {
-            mShowTimeAdapter.setNewData(it)
+            mShowTimeAdapter.setNewData(it,mDateForAPI)
         }
 
         itemView.tvCinemas.text = mCinema?.cinema

@@ -38,7 +38,7 @@ class CinemasFragment : Fragment(), DateDelegate {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onTapDate() {
+    override fun onTapDate(cinemaTimeSlotId: Int, bookingDate: String, startTime: String?) {
 
     }
 

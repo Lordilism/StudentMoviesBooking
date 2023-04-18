@@ -20,20 +20,21 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivPaymentLogo"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:paddingStart="@dimen/margin_medium"
                 app:srcCompat="@drawable/placeholder_payment_logo" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPaymentTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:gravity="center_vertical"
-                android:layout_toEndOf="@id/ivPaymentLogo"
                 android:layout_marginStart="@dimen/margin_medium_2"
-                android:text="UPI"/>
+                android:layout_toEndOf="@id/ivPaymentLogo"
+                android:gravity="center_vertical"
+                android:text="UPI"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_alignParentEnd="true"

@@ -2,6 +2,7 @@ package com.example.moviesbookingapp.data.models
 
 import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.responses.OtpResponse
+import com.example.moviesbookingapp.network.responses.SnackResponse
 
 interface MovieModel {
     fun getOtp(
@@ -61,4 +62,38 @@ interface MovieModel {
     )
 
     fun getConfig(key:String):ConfigVO?
+
+    fun getSeat(
+        authorization:String,
+        dayTimeSlotId:Int,
+        bookingDate:String,
+        onSuccess:(MutableList<MutableList<SeatVO>>) -> Unit,
+        onFailure:(String) -> Unit
+    )
+
+    fun getSnack(
+        authorization: String,
+        categoryId:Int,
+        onSuccess: (List<SnackVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getSnackCategory(
+        authorization: String,
+        onSuccess: (List<SnackCategoryVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getPayment(
+        authorization: String,
+        onSuccess: (List<PaymentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getTicketCheckout(
+        authorization:String,
+        ticketCheckout: CheckOutBody,
+        onSuccess:(TicketCheckOutVO) -> Unit,
+        onFailure:(String) -> Unit
+    )
 }

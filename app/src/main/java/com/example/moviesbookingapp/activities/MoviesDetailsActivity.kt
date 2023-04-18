@@ -15,12 +15,12 @@ import com.example.moviesbookingapp.data.models.MovieModel
 import com.example.moviesbookingapp.data.models.MovieModelImpl
 import com.example.moviesbookingapp.data.vos.MovieVO
 import com.example.moviesbookingapp.utils.IMAGE_BASE_URL
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_movies_details.*
 
 class MoviesDetailsActivity : AppCompatActivity() {
     lateinit var mCastListAdapter: CastListAdapter
     private var mMovieModel: MovieModel = MovieModelImpl
+    private lateinit var mMovieVO: MovieVO
 
 
 
@@ -45,7 +45,7 @@ class MoviesDetailsActivity : AppCompatActivity() {
         setUpMoviesInfo()
         setUpBackBtn()
         setUpCastRecyclerView()
-        navigateToDateSelect()
+
         setUpVideo()
 
         val movieId = intent.getStringExtra(IE_MOVIE_ID)
@@ -55,6 +55,7 @@ class MoviesDetailsActivity : AppCompatActivity() {
         movieId?.let {
             requestData(it)
         }
+        navigateToDateSelect(mMovieVO,movieId!!)
 
 
     }
@@ -63,6 +64,7 @@ class MoviesDetailsActivity : AppCompatActivity() {
         mMovieModel.getMoviesDetails(
             onSuccess = {
                 bindData(it)
+                mMovieVO = it
 
             },
             onFailure = {
@@ -148,9 +150,9 @@ class MoviesDetailsActivity : AppCompatActivity() {
     }
 
 
-    private fun navigateToDateSelect() {
+    private fun navigateToDateSelect(mMovieVO: MovieVO,id:String) {
         btnBooking.setOnClickListener {
-            startActivity(DateSelectActivity.newIntent(this))
+            startActivity(DateSelectActivity.newIntent(this,mMovieVO.originalTitle,id))
         }
     }
 

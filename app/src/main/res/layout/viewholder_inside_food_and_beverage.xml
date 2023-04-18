@@ -21,19 +21,20 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/ivCross"
         android:layout_marginStart="@dimen/margin_card_medium"
-        android:textColor="@color/colorSecondaryText"
         android:layout_toEndOf="@id/ivCross"
         android:fontFamily="@font/dm_sans"
-        android:text="Potatoe Chips (Qt.1)" />
+        android:text="Potatoe Chips (Qt.1)"
+        android:textColor="@color/colorSecondaryText" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvItemPriceFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1000Ks"
-        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
         android:fontFamily="@font/dm_sans"
+        android:text="1000Ks"
         android:textColor="@color/colorSecondaryText"
 
-        android:layout_alignParentEnd="true"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

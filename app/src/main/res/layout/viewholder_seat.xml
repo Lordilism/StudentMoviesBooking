@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivSeat"
         android:layout_width="wrap_content"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginBottom="2dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="1dp"
+        android:paddingEnd="1dp"
+        app:srcCompat="@drawable/ic_chair_available_color"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivSeatFromSeatSelect"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_chair"/>
-    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSeatName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text=""/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

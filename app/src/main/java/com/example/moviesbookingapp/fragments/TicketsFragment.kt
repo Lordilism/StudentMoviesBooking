@@ -43,7 +43,9 @@ class TicketsFragment : Fragment(),TicketDelegate {
     }
 
     override fun onTapTicket() {
-        startActivity(this.context?.let { CheckOutActivity.newIntent(it,true) })
+//        startActivity(this.context?.let { CheckOutActivity.newIntent(it,true,
+//            mutableListOf<String>() as ArrayList<String>)
+//        })
     }
 
 

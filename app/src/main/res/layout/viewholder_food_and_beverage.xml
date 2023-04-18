@@ -57,12 +57,13 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalFoodPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/dm_sans"
-        android:textColor="@color/white"
-        android:text="2000Ks"/>
+        android:text="2000Ks"
+        android:textColor="@color/white" />
 
     <RelativeLayout
         android:layout_width="match_parent"

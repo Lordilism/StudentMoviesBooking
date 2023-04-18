@@ -169,5 +169,64 @@ object MovieModelImpl : MovieModel {
         return mDatabase?.bookingDao()?.getConfig(key)
     }
 
+    override fun getSeat(
+        authorization: String,
+        dayTimeSlotId: Int,
+        bookingDate: String,
+        onSuccess: (MutableList<MutableList<SeatVO>>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mMovieDataAgents.getSeat(
+            authorization = authorization,
+            dayTimeSlotId = dayTimeSlotId,
+            bookingDate = bookingDate,
+            onSuccess = onSuccess,
+            onFailure
+        )
+    }
+
+    override fun getSnack(
+        authorization: String,
+        categoryId: Int,
+        onSuccess: (List<SnackVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mMovieDataAgents.getSnack(
+            authorization,
+            categoryId,
+            onSuccess,
+            onFailure
+        )
+    }
+
+    override fun getSnackCategory(
+        authorization: String,
+        onSuccess: (List<SnackCategoryVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mMovieDataAgents.getSnackCategory(authorization, onSuccess, onFailure)
+    }
+
+    override fun getPayment(
+        authorization: String,
+        onSuccess: (List<PaymentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mMovieDataAgents.getPayment(
+            authorization,
+            onSuccess,
+            onFailure
+        )
+    }
+
+    override fun getTicketCheckout(
+        authorization: String,
+        ticketCheckout: CheckOutBody,
+        onSuccess: (TicketCheckOutVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mMovieDataAgents.getTicketCheckout(authorization,ticketCheckout,onSuccess,onFailure)
+    }
+
 
 }

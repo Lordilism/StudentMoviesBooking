@@ -139,7 +139,10 @@ class SearchActivity : AppCompatActivity(), MoviesDelegate, DateDelegate {
 
     }
 
-    override fun onTapDate() {
+
+
+    override fun onTapDate(cinemaTimeSlotId: Int, bookingDate: String, startTime: String?) {
+
     }
 
     override fun onTapDetails() {

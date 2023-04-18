@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/margin_medium"
     android:paddingStart="@dimen/margin_medium"
     android:layout_margin="@dimen/margin_small">
 
@@ -26,20 +28,20 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivFoodGrab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
                 app:srcCompat="@drawable/placholder_food" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvFoodName"
-                android:layout_below="@id/ivFoodGrab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/ivFoodGrab"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="@font/inter_medium"
                 android:text="Potatoe Chip"
-                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -48,9 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvFoodName"
-                android:fontFamily="@font/inter_medium"
                 android:layout_centerHorizontal="true"
-                android:text="1000Ks"
+                android:fontFamily="@font/inter_medium"
+                tools:text="1000Ks"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold" />
 
@@ -69,11 +71,11 @@
                     android:text="ADD"
                     android:textColor="@color/black" />
                 <LinearLayout
-                    android:layout_gravity="center"
+                    android:layout_gravity="end"
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="end"
                     android:paddingTop="@dimen/margin_medium"
+                    android:paddingEnd="@dimen/margin_medium"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivIncrease"
@@ -81,6 +83,7 @@
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_baseline_add_circle_accent_18dp"/>
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/numberOfFood"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_medium"

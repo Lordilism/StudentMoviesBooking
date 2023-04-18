@@ -1,9 +1,6 @@
 package com.example.moviesbookingapp.network.responses
 
-import com.example.moviesbookingapp.data.vos.BannerVO
-import com.example.moviesbookingapp.data.vos.COMING_SOON
-import com.example.moviesbookingapp.data.vos.MovieVO
-import com.example.moviesbookingapp.data.vos.NOW_PLAYING
+import com.example.moviesbookingapp.data.vos.CheckOutBody
 import com.example.moviesbookingapp.utils.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -27,29 +24,29 @@ interface TheMovieApi {
     ): Call<OtpResponse>
 
     @GET(API_GET_CITIES)
-    fun getCities():Call<CityResponse>
+    fun getCities(): Call<CityResponse>
 
 
     @GET(API_BANNER)
-    fun getBanner():Call<BannerResponse>
+    fun getBanner(): Call<BannerResponse>
 
     @GET(API_MOVIES)
     fun getNowPlayingMovies(
         @Query("status")
-        status:String = "current"
-    ):Call<MovieResponse>
+        status: String = "current"
+    ): Call<MovieResponse>
 
     @GET(API_MOVIES)
     fun getComingMovies(
         @Query("status")
-        status:String = "comingsoon"
-    ):Call<MovieResponse>
+        status: String = "comingsoon"
+    ): Call<MovieResponse>
 
     @GET("$API_MOVIES_DETAILS/{movieId}")
     fun getMovieDetails(
-        @Path("movieId") movieId :String
+        @Path("movieId") movieId: String
 
-    ):Call<MovieDetailsResponse>
+    ): Call<MovieDetailsResponse>
 
     @GET(API_CINEMA_TIMESLOT)
     fun getCinemaTimeslot(
@@ -57,15 +54,49 @@ interface TheMovieApi {
         authorization: String,
         @Query("date")
         date: String
-    ):Call<CinemaTimeSlotResponse>
+    ): Call<CinemaTimeSlotResponse>
 
     @GET(API_CONFIG)
     fun getConfig(
-    ):Call<ConfigResponse>
+    ): Call<ConfigResponse>
+
+    @GET(API_GET_SEAT)
+    fun getSeat(
+        @Header("Authorization")
+        authorization: String,
+        @Query("cinema_day_timeslot_id") cinemaDayTimeSLotId: Int,
+        @Query("booking_date") bookingDate: String
+    ): Call<CinemaGetSeatResponse>
+
+    @GET(API_GET_SNACK)
+    fun getSnack(
+        @Header("Authorization")
+        authorization: String,
+        @Query("category_id")
+        categoryId: Int
+    ): Call<SnackResponse>
+
+    @GET(API_GET_SNACK_CATEGORY)
+    fun getSnackCategory(
+        @Header("Authorization")
+        authorization: String,
+    ):Call<SnackCategoryResponse>
+
+    @GET(API_GET_PAYMENT_TYPE)
+    fun getPayement(
+        @Header("Authorization")
+        authorization: String
+    ):Call<PaymentTypeResponse>
 
 
+    @POST(API_POST_CHECK_OUT)
+    fun getCheckOut(
+        @Header("Authorization")
+        authorization: String,
 
+        @Body checkOutTicket: CheckOutBody
 
+    ):Call<CheckOutResponse>
 
 
 }
