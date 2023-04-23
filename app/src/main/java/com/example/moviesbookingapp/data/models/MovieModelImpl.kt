@@ -228,5 +228,13 @@ object MovieModelImpl : MovieModel {
         mMovieDataAgents.getTicketCheckout(authorization,ticketCheckout,onSuccess,onFailure)
     }
 
+    override fun insertTicket(ticket: TicketForDatabase) {
+        mDatabase?.bookingDao()?.insertTicket(ticket)
+    }
+
+    override fun getAllTickets(): List<TicketForDatabase>? {
+        return mDatabase?.bookingDao()?.getAllTickets()
+    }
+
 
 }

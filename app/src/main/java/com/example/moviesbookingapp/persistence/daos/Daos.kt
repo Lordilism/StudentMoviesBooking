@@ -4,10 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.moviesbookingapp.data.vos.BannerVO
-import com.example.moviesbookingapp.data.vos.CityVo
-import com.example.moviesbookingapp.data.vos.ConfigVO
-import com.example.moviesbookingapp.data.vos.MovieVO
+import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.responses.OtpResponse
 
 @Dao
@@ -51,6 +48,12 @@ interface Daos {
 
     @Query("SELECT * FROM config WHERE `key` = :key")
     fun getConfig(key:String):ConfigVO
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTicket(ticket: TicketForDatabase)
+
+    @Query("SELECT * FROM ticket")
+    fun getAllTickets():List<TicketForDatabase>
 
 
 

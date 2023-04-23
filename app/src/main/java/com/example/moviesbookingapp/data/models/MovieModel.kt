@@ -96,4 +96,8 @@ interface MovieModel {
         onSuccess:(TicketCheckOutVO) -> Unit,
         onFailure:(String) -> Unit
     )
+
+    fun insertTicket(ticket:TicketForDatabase)
+
+    fun getAllTickets():List<TicketForDatabase>?
 }
