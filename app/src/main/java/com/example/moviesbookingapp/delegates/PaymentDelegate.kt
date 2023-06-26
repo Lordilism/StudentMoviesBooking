@@ -1,5 +1,5 @@
 package com.example.moviesbookingapp.delegates
 
 interface PaymentDelegate {
-    fun onTapPayment()
+    fun onTapPayment(id: Int?)
 }

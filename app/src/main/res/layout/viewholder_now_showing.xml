@@ -53,10 +53,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitleMovies"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
             android:fontFamily="@font/inter_light"
+            android:layout_toStartOf="@id/ivImdbLogo"
             android:text="Black Widow"
             android:textColor="@color/white"
             android:textSize="@dimen/text_small"
@@ -75,6 +76,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImdbLogo"
             android:layout_width="30dp"
             android:layout_height="20dp"
             android:layout_alignTop="@id/tvRating"

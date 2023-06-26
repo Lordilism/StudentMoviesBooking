@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesbookingapp.adapters.ShowTimeAdapter
 import com.example.moviesbookingapp.data.models.MovieModelImpl
+import com.example.moviesbookingapp.data.vos.CinemaInfoVO
 import com.example.moviesbookingapp.data.vos.CinemaVO
 import com.example.moviesbookingapp.data.vos.TimeSlotColor
 import com.example.moviesbookingapp.delegates.DateDelegate
@@ -23,6 +24,9 @@ class CinemaDetailsViewHolder(
     private var mCinema: CinemaVO? = null
     private var mMovieModel = MovieModelImpl
     private var mDateForAPI = ""
+    private var cinemaName =""
+
+    private var mCinemaInfoVO:CinemaInfoVO? = null
 
 
     private var color: LinkedTreeMap<Int, String> = LinkedTreeMap<Int, String>()
@@ -42,7 +46,7 @@ class CinemaDetailsViewHolder(
 
         }
         itemView.tvSeeDetals.setOnClickListener {
-            delegate.onTapDetails()
+            mCinemaInfoVO?.let { it1 -> delegate.onTapDetails(it1) }
         }
 
     }
@@ -65,10 +69,11 @@ class CinemaDetailsViewHolder(
 
     fun bindData(cinema: CinemaVO, date:String) {
         mCinema = cinema
+        cinemaName = mCinema?.cinema.toString()
         mDateForAPI = date
 
         cinema.timeSlots?.let {
-            mShowTimeAdapter.setNewData(it,mDateForAPI)
+            mShowTimeAdapter.setNewData(it,mDateForAPI,cinemaName)
         }
 
         itemView.tvCinemas.text = mCinema?.cinema
@@ -88,6 +93,11 @@ class CinemaDetailsViewHolder(
             desiredValue.add(timeSlotColor)
         }
         return desiredValue
+    }
+
+    fun bind(mListVO: CinemaInfoVO) {
+        mCinemaInfoVO = mListVO
+        itemView.tvCinemas.text = mListVO.name
     }
 
 

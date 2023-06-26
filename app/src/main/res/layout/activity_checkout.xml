@@ -205,21 +205,21 @@
                             android:textSize="@dimen/text_regular_2x"
                             android:textStyle="bold" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dm_sans"
-                            android:text=" (3D)"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_regular_2x" />
+<!--                        <androidx.appcompat.widget.AppCompatTextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/dm_sans"-->
+<!--                            android:text=" (3D)"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="@dimen/text_regular_2x" />-->
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dm_sans"
-                            android:text=" (U/A)"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_regular_2x" />
+<!--                        <androidx.appcompat.widget.AppCompatTextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/dm_sans"-->
+<!--                            android:text=" (U/A)"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="@dimen/text_regular_2x" />-->
 
                     </LinearLayout>
 
@@ -233,18 +233,19 @@
                         android:layout_marginEnd="@dimen/margin_medium">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCinemaName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/dm_sans"
                             android:text="JCGV : Junction City"
                             android:textColor="@color/colorAccent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dm_sans"
-                            android:text="(SCREEN2)"
-                            android:textColor="@color/colorSecondaryText" />
+<!--                        <androidx.appcompat.widget.AppCompatTextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/dm_sans"-->
+<!--                            android:text="(SCREEN2)"-->
+<!--                            android:textColor="@color/colorSecondaryText" />-->
 
                     </LinearLayout>
 

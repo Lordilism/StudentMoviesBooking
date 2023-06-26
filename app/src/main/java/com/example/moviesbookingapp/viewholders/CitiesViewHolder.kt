@@ -2,10 +2,8 @@ package com.example.moviesbookingapp.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.moviesbookingapp.data.vos.CityVo
 import com.example.moviesbookingapp.delegates.CitiesDelegate
-import com.example.moviesbookingapp.utils.BASE_URL
 import kotlinx.android.synthetic.main.viewholder_cities.view.*
 
 class CitiesViewHolder(itemView: View,mDelegate: CitiesDelegate) : RecyclerView.ViewHolder(itemView) {
@@ -13,11 +11,12 @@ class CitiesViewHolder(itemView: View,mDelegate: CitiesDelegate) : RecyclerView.
 
     init {
         itemView.setOnClickListener {
-            mDelegate.onTapCities()
+            mDelegate.onTapCities(mCityVo?.name)
         }
     }
 
     fun bindData(city: CityVo){
+        mCityVo = city
         itemView.tvCitiesNameFromPickLocation.text = city.name
 
     }

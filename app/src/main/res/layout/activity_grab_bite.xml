@@ -141,7 +141,7 @@
                 android:layout_toStartOf="@id/ivForward"
                 android:fontFamily="@font/inter_medium"
                 android:gravity="center_vertical"
-                android:text="2000Ks"
+                android:text="0Ks"
                 android:textStyle="bold" />
         </RelativeLayout>
 

@@ -32,9 +32,7 @@ class NowShowingAdapter(val isNowShowwing:Boolean,private val mDelegateMovies:Mo
     override fun onBindViewHolder(holder: NowShowingViewHolder, position: Int) {
 
         if (moviesData.isNotEmpty()){
-
            holder.bindData(moviesData[position])
-
         }
 
 

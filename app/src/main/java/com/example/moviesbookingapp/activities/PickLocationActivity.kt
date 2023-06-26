@@ -47,8 +47,8 @@ class PickLocationActivity : AppCompatActivity(),CitiesDelegate {
         rvCities.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
     }
 
-    override fun onTapCities() {
-        startActivity(HomeActivity.newIntent(this))
+    override fun onTapCities(cityName: String?) {
+        startActivity(HomeActivity.newIntent(this,cityName?:""))
     }
 
 }

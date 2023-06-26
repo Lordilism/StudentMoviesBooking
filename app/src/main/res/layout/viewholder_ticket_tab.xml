@@ -58,14 +58,14 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivLogoMovies"
-                    app:srcCompat="@drawable/placeholder_black_widow"
                     android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/margin_medium"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginBottom="@dimen/margin_medium"
                     android:background="@drawable/background_rounded_corner_movies"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/placeholder_black_widow" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -82,13 +82,14 @@
                             android:id="@+id/llTitleFromTicketInformation"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
                             android:layout_marginStart="@dimen/margin_medium_2"
                             android:layout_marginTop="@dimen/margin_medium"
                             android:layout_marginEnd="@dimen/margin_medium"
+                            android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvMoviesName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/dm_sans"
@@ -97,21 +98,21 @@
                                 android:textSize="@dimen/text_regular_2x"
                                 android:textStyle="bold" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/dm_sans"
-                                android:text=" (3D)"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/text_regular_2x" />
+<!--                            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/dm_sans"-->
+<!--                                android:text=" (3D)"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/text_regular_2x" />-->
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/dm_sans"
-                                android:text=" (U/A)"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/text_regular_2x" />
+<!--                            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/dm_sans"-->
+<!--                                android:text=" (U/A)"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/text_regular_2x" />-->
 
                         </LinearLayout>
 
@@ -119,15 +120,17 @@
                             android:id="@+id/llCinemaNameFromTicketInformation"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
                             android:layout_marginStart="@dimen/margin_medium_2"
                             android:layout_marginTop="@dimen/margin_medium"
-                            android:layout_marginEnd="@dimen/margin_medium">
+                            android:layout_marginEnd="@dimen/margin_medium"
+                            android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvCinemaTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/dm_sans"
+                                android:singleLine="true"
                                 android:text="JCGV : Junction City"
                                 android:textColor="@color/colorAccent" />
 
@@ -151,6 +154,7 @@
                                 android:textStyle="bold" />
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvTicketAmount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/dm_sans"
@@ -168,13 +172,15 @@
 
 
                     </LinearLayout>
+
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSeatNumbers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/margin_medium"
                         android:layout_marginStart="@dimen/margin_medium_2"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="@dimen/margin_medium"
                         android:fontFamily="@font/dm_sans"
                         android:text="Gold-G8,G7"
                         android:textColor="@color/white"
@@ -217,12 +223,14 @@
                         app:srcCompat="@drawable/ic_baseline_calendar_month_accent_24dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvBookingDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ivCalendar"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/margin_small"
                         android:text="Sat, 18 Jun, 2022"
-                        android:textAlignment="textStart"
+                        android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -240,10 +248,11 @@
                         app:srcCompat="@drawable/ic_baseline_access_time_accent_24dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvShowTimeForTicketFrag"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/margin_small"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ivClock"
+                        android:layout_marginTop="@dimen/margin_small"
                         android:text="3:30 PM"
                         android:textAlignment="center"
                         android:textColor="@color/colorSecondaryText"
@@ -263,6 +272,7 @@
                         app:srcCompat="@drawable/ic_baseline_location_on_accent_24dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCinemaAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ivLocation"

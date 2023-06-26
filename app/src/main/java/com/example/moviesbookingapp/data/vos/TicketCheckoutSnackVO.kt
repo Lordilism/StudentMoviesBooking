@@ -1,6 +1,7 @@
 package com.example.moviesbookingapp.data.vos
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class TicketCheckoutSnackVO(
     @SerializedName("description")
@@ -26,5 +27,5 @@ data class TicketCheckoutSnackVO(
 
     @SerializedName("quantity")
     val quantity: Int?
-) {
+):Serializable{
 }

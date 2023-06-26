@@ -1,6 +1,7 @@
 package com.example.moviesbookingapp.data.vos
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class CastersVO(
     @SerializedName("adult")
@@ -38,5 +39,5 @@ data class CastersVO(
 
     @SerializedName("order")
     val order:Int?
-) {
+) :Serializable{
 }

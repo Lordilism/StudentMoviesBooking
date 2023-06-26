@@ -2,6 +2,7 @@ package com.example.moviesbookingapp.network.dataAgents
 
 import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.responses.CityResponse
+import com.example.moviesbookingapp.network.responses.LogOutResponse
 import com.example.moviesbookingapp.network.responses.OtpResponse
 
 interface MovieDataAgents {
@@ -90,5 +91,16 @@ interface MovieDataAgents {
         ticketCheckout: CheckOutBody,
         onSuccess:(TicketCheckOutVO) -> Unit,
         onFailure:(String) -> Unit
+    )
+
+    fun getCinemaInfo(
+        onSuccess: (List<CinemaInfoVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun logOut(
+        authorization: String,
+        onSuccess: (LogOutResponse) -> Unit,
+        onFailure: (String) -> Unit
     )
 }

@@ -14,6 +14,7 @@ class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<Ti
     RecyclerView.Adapter<ShowTimeViewHolder>() {
     private var mTimeSlots: List<TimeSlotVO> = listOf()
     private var mDateString: String? =null
+    private var mCinemaName:String?  = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowTimeViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.viewholder_cinema_date, parent, false)
@@ -22,7 +23,7 @@ class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<Ti
 
     override fun onBindViewHolder(holder: ShowTimeViewHolder, position: Int) {
 
-            holder.bindData(mTimeSlots[position],mDateString!!)
+            holder.bindData(mTimeSlots[position],mDateString!!,mCinemaName)
 
     }
 
@@ -31,10 +32,11 @@ class ShowTimeAdapter(private val delegate: DateDelegate,val  data: ArrayList<Ti
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setNewData(timeSlot: List<TimeSlotVO>, mDateForAPI: String,) {
+    fun setNewData(timeSlot: List<TimeSlotVO>, mDateForAPI: String, cinemaName: String) {
 
         mTimeSlots = timeSlot
         mDateString = mDateForAPI
+        mCinemaName = cinemaName
         notifyDataSetChanged()
     }
 }

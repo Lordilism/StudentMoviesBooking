@@ -12,22 +12,26 @@ class SeatViewHolder(itemview: View, val mDelegate: SeatSelect) :
 
     private var mSeat: SeatVO? = null
     private var mIsSelected: Boolean = false
-    private var isAvailable: Boolean = true
+//    private var isAvailable: Boolean = true
 
 
     init {
         itemview.ivSeat.setOnClickListener {
-            mIsSelected = !mIsSelected
-            when(mIsSelected){
-                false->{
-                    itemview.ivSeat.setColorFilter(Color.WHITE)
-                    mSeat?.let { seatVO -> mDelegate.onTapSeat(seatVO,false) }
-                }
-                true->{
-                    itemview.ivSeat.setColorFilter(Color.GREEN)
-                    mSeat?.let { seatVO -> mDelegate.onTapSeat(seatVO,true) }
+
+            if (mSeat?.type == "available"){
+                mIsSelected = !mIsSelected
+                when(mIsSelected){
+                    false->{
+                        itemview.ivSeat.setColorFilter(Color.WHITE)
+                        mSeat?.let { seatVO -> mDelegate.onTapSeat(seatVO,false) }
+                    }
+                    true->{
+                        itemview.ivSeat.setColorFilter(Color.GREEN)
+                        mSeat?.let { seatVO -> mDelegate.onTapSeat(seatVO,true) }
+                    }
                 }
             }
+
 
         }
 

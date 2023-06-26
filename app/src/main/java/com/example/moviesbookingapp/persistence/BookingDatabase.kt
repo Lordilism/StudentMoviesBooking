@@ -9,7 +9,7 @@ import com.example.moviesbookingapp.network.responses.BannerResponse
 import com.example.moviesbookingapp.network.responses.OtpResponse
 import com.example.moviesbookingapp.persistence.daos.Daos
 
-@Database(entities = [OtpResponse::class, CityVo::class, ConfigVO::class,MovieVO::class, BannerVO::class,TicketForDatabase::class], version = 3, exportSchema = false)
+@Database(entities = [OtpResponse::class, CityVo::class, ConfigVO::class,MovieVO::class, BannerVO::class,TicketForDatabase::class], version = 6, exportSchema = false)
 abstract class BookingDatabase:RoomDatabase() {
     companion object{
         const val BOOKING_DB = "BOOKING_DB"

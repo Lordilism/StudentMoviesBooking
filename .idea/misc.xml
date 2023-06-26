@@ -50,6 +50,7 @@
         <entry key="app/src/main/res/drawable/placeholder_date.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/selected_tab.xml" value="0.1035" />
         <entry key="app/src/main/res/drawable/shape_movies.xml" value="0.1035" />
+        <entry key="app/src/main/res/drawable/showtime_bkg.xml" value="0.104" />
         <entry key="app/src/main/res/drawable/tab_indicator.xml" value="0.1035" />
         <entry key="app/src/main/res/drawable/tab_rectangle.xml" value="0.1035" />
         <entry key="app/src/main/res/drawable/tab_selectoe.xml" value="0.1035" />
@@ -57,7 +58,7 @@
         <entry key="app/src/main/res/drawable/top_arrow.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_about_movie.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/activity_check_out.xml" value="0.24375" />
-        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.3060897435897436" />
         <entry key="app/src/main/res/layout/activity_date_select.xml" value="0.22502870264064295" />
         <entry key="app/src/main/res/layout/activity_get_otpactivity.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_grab_bite.xml" value="0.18796296296296297" />
@@ -66,10 +67,10 @@
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_movies_details.xml" value="0.17314814814814813" />
         <entry key="app/src/main/res/layout/activity_payment.xml" value="0.21347305862991905" />
-        <entry key="app/src/main/res/layout/activity_pick_location.xml" value="0.17314814814814813" />
+        <entry key="app/src/main/res/layout/activity_pick_location.xml" value="0.10455763249872474" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/activity_seat_select.xml" value="0.1814814814814815" />
-        <entry key="app/src/main/res/layout/activity_ticket_confirmation.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_ticket_confirmation.xml" value="0.20063025210084034" />
         <entry key="app/src/main/res/layout/activity_tickets_details.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/booking_success.xml" value="0.1814814814814815" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.24166666666666667" />

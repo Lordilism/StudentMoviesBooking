@@ -1,5 +1,5 @@
 package com.example.moviesbookingapp.delegates
 
 interface SelectDateDelegate {
-    fun onTapSelectDate(param:String)
+    fun onTapSelectDate(selectedDate:String)
 }

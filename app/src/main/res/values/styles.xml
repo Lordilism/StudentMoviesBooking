@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Customize the dialog background, text color, etc. -->
+        <item name="android:windowBackground">@drawable/background_ticket_cancelion</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Add more customizations as needed -->
+    </style>
+</resources>

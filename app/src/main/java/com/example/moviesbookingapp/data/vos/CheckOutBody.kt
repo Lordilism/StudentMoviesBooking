@@ -1,6 +1,7 @@
 package com.example.moviesbookingapp.data.vos
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class CheckOutBody(
     @SerializedName("movie_id")
@@ -20,5 +21,5 @@ data class CheckOutBody(
 
     @SerializedName("payment_type_id")
     val paymentTypeId: Int?,
-) {
+) : Serializable {
 }

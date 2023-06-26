@@ -1,6 +1,7 @@
 package com.example.moviesbookingapp.data.vos
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class SeatVO(
     @SerializedName("id")
@@ -22,5 +23,5 @@ data class SeatVO(
 
 
 
-) {
+):Serializable {
 }

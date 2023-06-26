@@ -6,68 +6,369 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/margin_large"
+            android:weightSum="3">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/placeholder_profile_screen"
-                android:scaleX="1.2"
-                android:scaleY="1.2" />
-            <!--                <FrameLayout-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_centerInParent="true"-->
-            <!--                    android:layout_height="match_parent">-->
-            <!--                    -->
-            <!--                    -->
-            <!--                </FrameLayout>-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ivLogoProfile"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/margin_medium_2"
-                    app:srcCompat="@drawable/ic_login_or_signup" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/placeholder_profile_screen"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2" />
+                <!--                <FrameLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_centerInParent="true"-->
+                <!--                    android:layout_height="match_parent">-->
+                <!--                    -->
+                <!--                    -->
+                <!--                </FrameLayout>-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivLogoProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    app:srcCompat="@drawable/ic_profile_circled" />
+                    <!--                <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_below="@id/ivLogoProfile"-->
+                    <!--                    android:layout_centerHorizontal="true"-->
+                    <!--                    android:layout_marginTop="@dimen/margin_medium_2"-->
+                    <!--                    app:srcCompat="@drawable/ic_login_or_signup" />-->
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/ic_profile_circled" />
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_weight="2"
-            android:background="@color/colorPrimary"
-            android:layout_height="0dp">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvFromProfile"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_medium_2"
+                android:paddingTop="@dimen/margin_card_medium"
+                android:paddingEnd="@dimen/margin_medium_2"
+                android:paddingBottom="@dimen/margin_medium_2">
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingPurchase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoPurchase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_card_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_purchase" />
+
+                    <View
+                        android:id="@+id/viewDone"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/ivLogoPurchase"
+                        android:background="@color/color_dotted_line" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogoPurchase"
+                        android:text="Purchase History"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingOffer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogOffer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_card_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_offer" />
+
+                    <View
+                        android:id="@+id/viewDTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/ivLogOffer"
+                        android:background="@color/color_dotted_line" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogOffer"
+                        android:text="Offer"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingGiftCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoGiftCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_card_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_giftcard" />
+
+                    <View
+                        android:id="@+id/viewDThree"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/ivLogoGiftCard"
+                        android:background="@color/color_dotted_line" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogoGiftCard"
+                        android:text="Gift Card"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_location" />
+
+                    <View
+                        android:id="@+id/viewDFour"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/ivLogoLocation"
+                        android:background="@color/color_dotted_line" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogoLocation"
+                        android:text="Location"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoPayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_card_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_payment" />
+
+                    <View
+                        android:id="@+id/viewDfive"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/ivLogoPayment"
+                        android:background="@color/color_dotted_line" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogoPayment"
+                        android:text="Payment"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_card_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_help_support" />
+
+                    <View
+                        android:id="@+id/viewDsix"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/ivLogoHelp"
+                        android:background="@color/color_dotted_line" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogoHelp"
+                        android:text="Help and Support"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rvSettingLogOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogoLogOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="@dimen/margin_medium"
+                        android:paddingTop="@dimen/margin_medium_2"
+                        android:paddingBottom="@dimen/margin_medium_2"
+                        app:srcCompat="@drawable/ic_logout" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_card_medium"
+                        android:paddingBottom="@dimen/margin_card_medium"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_184dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_medium_2"
+                        android:layout_toEndOf="@id/ivLogoLogOut"
+                        android:text="Logout"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
 
 
-        </RelativeLayout>
+            </LinearLayout>
 
 
-    </LinearLayout>
-
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,9 +39,9 @@ class MoviesDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_details)
-        val nowShowing = intent.getBooleanExtra(IE_NOW_SHOWING,false)
+        val nowShowingFlag = intent.getBooleanExtra(IE_NOW_SHOWING,false)
 
-        setVisibilityOfNotify(nowShowing)
+        setVisibilityOfNotify(nowShowingFlag)
         setUpMoviesInfo()
         setUpBackBtn()
         setUpCastRecyclerView()
@@ -85,7 +85,7 @@ class MoviesDetailsActivity : AppCompatActivity() {
         tvStoryLine.text = "Storyline\n\n${movie.overView}"
 
         tvMOvieReleaseDate.text =
-            "Relaease Date\n${movie.formatDate(movie.releaseDate.toString(), true)}"
+            "Release Date\n${movie.formatDate(movie.releaseDate.toString(), true)}"
 
         tvMovieDuration.text = "Duration\n${movie.getDurationInHour()}"
 
@@ -121,12 +121,6 @@ class MoviesDetailsActivity : AppCompatActivity() {
                         chipThree.text  = genreList[2]
                         chipFour.visibility = View.GONE
                     }
-                    4->{
-                        chipOne.text = genreList[0]
-                        chipTwo.text = genreList[1]
-                        chipThree.text  = genreList[2]
-                        chipFour.text = genreList[3]
-                    }
                     else->{
                         chipOne.visibility = View.GONE
                         chipTwo.visibility = View.GONE
@@ -145,14 +139,14 @@ class MoviesDetailsActivity : AppCompatActivity() {
     }
 
     override fun onRestart() {
-        videoTrailor.start()
+        videoTrailor.pause()
         super.onRestart()
     }
 
 
     private fun navigateToDateSelect(mMovieVO: MovieVO,id:String) {
         btnBooking.setOnClickListener {
-            startActivity(DateSelectActivity.newIntent(this,mMovieVO.originalTitle,id))
+            startActivity(DateSelectActivity.newIntent(this,mMovieVO))
         }
     }
 

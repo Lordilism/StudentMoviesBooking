@@ -398,5 +398,56 @@ object RetrofitDataAgentImpl : MovieDataAgents {
         })
     }
 
+    override fun getCinemaInfo(
+        onSuccess: (List<CinemaInfoVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.getCinemaInfo()?.enqueue(object :Callback<CinemaResponse>{
+            override fun onResponse(
+                call: Call<CinemaResponse>,
+                response: Response<CinemaResponse>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.data?.let {
+                        onSuccess(it)
+                    }
+                }else{
+                    onFailure(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<CinemaResponse>, t: Throwable) {
+                onFailure(t.message?:"")
+            }
+
+        })
+    }
+
+    override fun logOut(
+        authorization: String,
+        onSuccess: (LogOutResponse) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mTheMovieApi?.logOut(authorization)?.enqueue(object :Callback<LogOutResponse>{
+            override fun onResponse(
+                call: Call<LogOutResponse>,
+                response: Response<LogOutResponse>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.let(onSuccess)
+
+                }else{
+                    onFailure(response.message()?:"")
+                }
+
+            }
+
+            override fun onFailure(call: Call<LogOutResponse>, t: Throwable) {
+                onFailure(t.message?:"")
+            }
+
+        })
+    }
+
 
 }

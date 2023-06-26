@@ -8,7 +8,7 @@ const val API_SIGN_IN_OTP = "/api/v2/check-otp"
 const val API_GET_CITIES = "/api/v2/cities"
 
 const val API_BANNER = "/api/v2/banners"
-const val API_MOVIES= "/api/v2/movies?status=current"
+const val API_MOVIES= "/api/v1/movies"
 
 const val API_MOVIES_DETAILS = "/api/v1/movies"
 
@@ -27,3 +27,8 @@ const val API_GET_SNACK_CATEGORY = "/api/v2/snack-categories"
 const val API_GET_PAYMENT_TYPE = "/api/v2/payment-types"
 
 const val API_POST_CHECK_OUT = "/api/v2/checkout"
+
+const val API_GET_CINEMA_INFO = "/api/v2/cinemas"
+
+const val API_LOG_OUT = "/api/v1/logout"
+

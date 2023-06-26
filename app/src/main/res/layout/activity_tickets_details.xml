@@ -81,11 +81,12 @@
             </FrameLayout>
 
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="32dp"
                 android:layout_below="@id/flFromCinemaDetails"
+
                 android:layout_marginStart="@dimen/margin_medium_2"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_medium_2">
@@ -152,6 +153,7 @@
                     android:textColor="@color/colorAccent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWheelChair"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvFacilities"
@@ -188,81 +190,83 @@
                     android:textColor="@color/white" />
 
                 <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupFromDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvSafety"
-                    app:singleLine="false"
-                    android:layout_marginTop="@dimen/margin_card_medium_2">
+                    android:layout_marginTop="@dimen/margin_card_medium_2"
+                    app:singleLine="false">
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_thermanal_scanning"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:id="@+id/chipFromDetails"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_thermanal_scanning"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_contactless_security_check"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_contactless_security_check"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_santization_before_every_show"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_santization_before_every_show"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_disposable_3d_glass"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_disposable_3d_glass"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_contactless_food_services"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_contactless_food_services"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_package_food"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_package_food"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/lbl_deep_cleaning_of_rest_room"
-                        app:chipCornerRadius="@dimen/margin_medium"
-                        app:chipMinHeight="@dimen/margin_large"
-                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />
+                    <!--                    <com.google.android.material.chip.Chip-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:backgroundTint="@color/colorAccent"-->
+                    <!--                        android:fontFamily="@font/inter_medium"-->
+                    <!--                        android:text="@string/lbl_deep_cleaning_of_rest_room"-->
+                    <!--                        app:chipCornerRadius="@dimen/margin_medium"-->
+                    <!--                        app:chipMinHeight="@dimen/margin_large"-->
+                    <!--                        app:chipMinTouchTargetSize="@dimen/margin_xlarge" />-->
 
 
                 </com.google.android.material.chip.ChipGroup>

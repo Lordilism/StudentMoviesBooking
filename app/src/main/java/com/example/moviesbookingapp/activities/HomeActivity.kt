@@ -2,6 +2,7 @@ package com.example.moviesbookingapp.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toolbar
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.example.moviesbookingapp.R
 import com.example.moviesbookingapp.adapters.AdapterBanner
+import com.example.moviesbookingapp.data.models.MovieModel
+import com.example.moviesbookingapp.data.models.MovieModelImpl
 import com.example.moviesbookingapp.fragments.CinemasFragment
 import com.example.moviesbookingapp.fragments.MoviesFragment
 import com.example.moviesbookingapp.fragments.ProfileFragment
@@ -18,21 +21,33 @@ import kotlinx.android.synthetic.main.fragment_movies.*
 
 class HomeActivity : AppCompatActivity() {
     lateinit var mBannerAdapter: AdapterBanner
-//    lateinit var mNowShowingCommingSoonAdapter: NowShowingCommingSoonAdapter
+
+    //    lateinit var mNowShowingCommingSoonAdapter: NowShowingCommingSoonAdapter
 //    lateinit var mBottomNavWithViewPagerAdapter: BottomNavWithViewPagerAdapter
+    private var mMovieModel: MovieModel = MovieModelImpl
+    private lateinit var sharedPreferences: SharedPreferences
+    private var mCitieName = "Yangon"
 
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, HomeActivity::class.java)
+        const val IE_CITY_NAME = "IE_CITY_NAME"
+        const val CITIES_NAME = "CITIES_NAME"
+        fun newIntent(context: Context, cityName: String): Intent {
+            return Intent(context, HomeActivity::class.java).putExtra(IE_CITY_NAME, cityName)
         }
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 //        setUpBottomNavigationWithViewPager()
-        val citiesName = intent.getStringExtra("CITY_NAME").toString()
-        tvCitiesName.text = citiesName
+        val cities = intent.getStringExtra(IE_CITY_NAME)?:"Yangon"
+        sharedPreferences = getSharedPreferences(CITIES_NAME, Context.MODE_PRIVATE)
+
+        saveToShare(mCitieName)
+
+        tvCitiesName.text = cities
         //
         setDefaultFragment()
         //toolbar Listeners
@@ -42,6 +57,28 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
+
+    private fun saveToShare(mCitieName: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+        editor.putString(CITIES_NAME, mCitieName)
+        editor.apply()
+
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        mCitieName = sharedPreferences.getString(CITIES_NAME, "Yangon").toString()
+        tvCitiesName.text = mCitieName
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mCitieName = sharedPreferences.getString(CITIES_NAME,"Yangon").toString()
+        tvCitiesName.text = mCitieName
+    }
+
+
 
     private fun setUpListenersToolbar() {
         toolbarFromHome.setOnMenuItemClickListener(object : Toolbar.OnMenuItemClickListener,
@@ -109,6 +146,7 @@ class HomeActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
 

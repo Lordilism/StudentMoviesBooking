@@ -7,6 +7,7 @@ import androidx.room.TypeConverters
 import com.example.moviesbookingapp.persistence.typeconverters.CasterVoListTypeConverter
 import com.example.moviesbookingapp.persistence.typeconverters.GenreListTypeConverter
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.time.LocalDate
 @Entity(tableName = "movie")
 @TypeConverters(
@@ -51,12 +52,12 @@ data class MovieVO(
     val casts: List<CastersVO>?,
 
     @ColumnInfo(name = "type")
-    var type: String
+    var type: String?
 
 
 
 
-) {
+):Serializable {
     fun basetenRating(): String {
         return "%.2f".format(rating)
     }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesbookingapp.R
@@ -14,38 +13,43 @@ import com.example.moviesbookingapp.data.models.MovieModelImpl
 import com.example.moviesbookingapp.data.vos.SeatVO
 import com.example.moviesbookingapp.delegates.SeatSelect
 import kotlinx.android.synthetic.main.activity_seat_select.*
+import java.io.Serializable
 
 class SeatSelectActivity : AppCompatActivity(), SeatSelect {
-    private lateinit var movieNameForCheckout: String
-    private lateinit var time: String
+//    private lateinit var movieNameForCheckout: String
+//    private lateinit var time: String
     private var mMovieModel: MovieModel = MovieModelImpl
     lateinit var mSeatAdapter: SeatAdapter
     private var mTicketPrice: MutableList<Int> = mutableListOf()
     private var mNumberOfTicket: MutableList<SeatVO> = mutableListOf()
     private var mSeatNameList: MutableList<String> = mutableListOf()
-    private lateinit var mMovieID:String
+    private lateinit var mMovieID: String
 
     companion object {
-        const val IE_CINEMA_ID = "IE_CINEMA_ID"
+        const val IE_SEAT_LIST = "IE_SEAT_LIST"
         const val IE_BOOKING_DATE = "IE_BOOKING_DATE"
-        const val IE_CINEMA_TIME = "IE_CINEMA_TIME"
-        const val IE_MOVIE_NAME_CHECKOUT = "IE_MOVIE_NAME_CHECKOUT"
-        const val IE_MOVIE_ID_ID  = "IE_ID"
+        const val IE_SLOT_ID = "IE_SLOT_ID"
+        const val IE_MOVIE_ID = "IE_MOVIE_ID"
+        const val IE_CINEMA_NAME = "IE_CINEMA_NAME"
+        const val IE_CINEMA_START_TIME = "IE_CINEMA_START_TIME"
 
         fun newIntent(
             context: Context,
-            cinemaTimeSlotId: Int,
+            seatVoList: MutableList<MutableList<SeatVO>>,
             bookingDate: String,
-            time: String,
-            mMovieNameForCheckout: String,
-            movieId: String
-        ): Intent {
+            slotId: Int,
+            mMovieId: String,
+            cinemaName: String,
+            startTime: String,
+
+            ): Intent {
             val intent = Intent(context, SeatSelectActivity::class.java)
-            intent.putExtra(IE_CINEMA_ID, cinemaTimeSlotId)
+            intent.putExtra(IE_SEAT_LIST, seatVoList as Serializable)
             intent.putExtra(IE_BOOKING_DATE, bookingDate)
-            intent.putExtra(IE_CINEMA_TIME, time)
-            intent.putExtra(IE_MOVIE_NAME_CHECKOUT, mMovieNameForCheckout)
-            intent.putExtra(IE_MOVIE_ID_ID,movieId)
+            intent.putExtra(IE_SLOT_ID,slotId)
+            intent.putExtra(IE_MOVIE_ID,mMovieId)
+            intent.putExtra(IE_CINEMA_NAME,cinemaName)
+            intent.putExtra(IE_CINEMA_START_TIME,startTime)
             return intent
 
 
@@ -56,59 +60,88 @@ class SeatSelectActivity : AppCompatActivity(), SeatSelect {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seat_select)
+        val seatList =
+            intent.getSerializableExtra(IE_SEAT_LIST) as MutableList<MutableList<SeatVO>>?
 
-        setUpSeatRecyclerView()
+        val listSeatVO = seatTest(seatList!!).flatten()
 
-        val cinemaTimeSlotId = intent.getIntExtra(IE_CINEMA_ID, 1)
-        Log.i("CinemaId", cinemaTimeSlotId.toString())
+        val booingDate = intent.getStringExtra(IE_BOOKING_DATE)   // date
+        Log.d("date" , "$booingDate")
 
-        val bookingDate = intent.getStringExtra(IE_BOOKING_DATE)  //to send
-        Log.i("booking", bookingDate.toString())
+        val timeSlotId = intent.getIntExtra(IE_SLOT_ID,1)  //slotId
+        Log.d("slotID" , "$timeSlotId")
 
-        time =
-            intent.getStringExtra(IE_CINEMA_TIME)
-                .toString()                                    //to send
-        Log.i("time", time.toString())
+        val movieId = intent.getStringExtra(IE_MOVIE_ID)            //movieID
+        Log.d("movieID", "$movieId")
 
-        movieNameForCheckout =
-            intent.getStringExtra(IE_MOVIE_NAME_CHECKOUT).toString()            // to send
-        Log.i("movieName", movieNameForCheckout.toString())
+        val cinemaName= intent.getStringExtra(IE_CINEMA_NAME)
 
-        mMovieID = intent.getStringExtra(IE_MOVIE_ID_ID).toString()
+        val cinemaStartTime = intent.getStringExtra(IE_CINEMA_START_TIME)
+        setUpSeatRecyclerView(listSeatVO)
+
+//        val cinemaTimeSlotId = intent.getIntExtra(IE_CINEMA_ID, 1)
+//        Log.i("CinemaId", cinemaTimeSlotId.toString())
+//
+//        val bookingDate = intent.getStringExtra(IE_BOOKING_DATE)  //to send
+//        Log.i("booking", bookingDate.toString())
+//
+//        time =
+//            intent.getStringExtra(IE_CINEMA_TIME)
+//                .toString()                                    //to send
+//        Log.i("time", time.toString())
+//
+//        movieNameForCheckout =
+//            intent.getStringExtra(IE_MOVIE_NAME_CHECKOUT).toString()            // to send
+//        Log.i("movieName", movieNameForCheckout.toString())
+//
+//        mMovieID = intent.getStringExtra(IE_MOVIE_ID_ID).toString()
 
 
-
-        mMovieModel.getSeat(
-            "Bearer ${mMovieModel.getOtp(201)?.token}",
-            cinemaTimeSlotId,
-            bookingDate!!,
-            onSuccess = {
-
-                val recycler = seatTest(it)
-                mSeatAdapter.setNewData(recycler.flatten())
-            },
-            onFailure = {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            }
-        )
-        btnBuyTickets.setOnClickListener {
-            setUpbtnBuy(movieNameForCheckout,time,mMovieID)
-        }
+        setUpListeners(bookingDate = booingDate!!, slotId = timeSlotId,movieId = movieId!!,cinemaName!!,cinemaStartTime!!)
 
 
     }
 
+    private fun setUpListeners(
+        bookingDate: String,
+        slotId: Int,
+        movieId: String,
+        cinemaName: String,
+        cinemaStartTime: String
+    ) {
+        btnBuyTickets.setOnClickListener {
+            setUpbtnBuy(bookingDate = bookingDate, timeSlotID = slotId, mMovieID = movieId,cinemaName ,cinemaStartTime )
+        }
+    }
 
-    private fun setUpSeatRecyclerView() {
+
+    private fun setUpSeatRecyclerView(seatList: List<SeatVO>) {
+
         mSeatAdapter = SeatAdapter(this)
         rvSeatVertical.adapter = mSeatAdapter
         rvSeatVertical.layoutManager = GridLayoutManager(this, 18)
 
+        mSeatAdapter.setNewData(seatList)
     }
 
 
-    private fun setUpbtnBuy(movieNameForCheckout: String, time: String, mMovieID: String) {
-        startActivity(GrabBiteActivity.newIntent(this, mSeatNameList,movieNameForCheckout,time,mMovieID))
+    private fun setUpbtnBuy(
+        bookingDate: String,
+        timeSlotID: Int,
+        mMovieID: String,
+        cinemaName: String,
+        cinemaStartTime: String
+    ) {
+        startActivity(
+            GrabBiteActivity.newIntent(
+                this,
+                mSeatNameList,
+                bookingDate,timeSlotID.toString(),
+                mMovieID,
+                cinemaName,
+                cinemaStartTime
+            )
+        )
         finish()
     }
 
@@ -144,8 +177,6 @@ class SeatSelectActivity : AppCompatActivity(), SeatSelect {
         networkListOfSeat.add(13, listHoriRow)
         networkListOfSeat.add(18, listHoriRow)
         return networkListOfSeat
-
-
     }
 
 
@@ -158,9 +189,6 @@ class SeatSelectActivity : AppCompatActivity(), SeatSelect {
             mNumberOfTicket.add(value, seatForTapping)
             mSeatNameList.add(mNumberOfTicket[value].seatName ?: "")
             value = value.inc()
-
-
-
 
             tvSeatSelectedNumber.text = "${mNumberOfTicket.count()} tickets"
             tvTicketPrice.text = "${mTicketPrice.sum()} Ks"
@@ -175,6 +203,9 @@ class SeatSelectActivity : AppCompatActivity(), SeatSelect {
 
 
         }
+
+        Log.d("seatList", mSeatNameList.toString())
+        Log.d("numberOfTicket", mNumberOfTicket.toString())
 
 
     }

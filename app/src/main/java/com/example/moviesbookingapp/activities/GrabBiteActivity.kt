@@ -10,6 +10,7 @@ import com.example.moviesbookingapp.R
 import com.example.moviesbookingapp.adapters.FoodAdapter
 import com.example.moviesbookingapp.data.models.MovieModel
 import com.example.moviesbookingapp.data.models.MovieModelImpl
+import com.example.moviesbookingapp.data.vos.CheckOutBodySnack
 import com.example.moviesbookingapp.data.vos.SnackCategoryVO
 import com.example.moviesbookingapp.data.vos.SnackVO
 import com.example.moviesbookingapp.delegates.SnackSelect
@@ -26,30 +27,38 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
 
     private var mPriceList: MutableList<Int> = mutableListOf()
 
+
+    private var mChekOutSnack: MutableList<CheckOutBodySnack> = mutableListOf()
+
 //    private var mSnackCategory:List<SnackCategoryVO> = listOf()
 
     private var mSnackCategory: MutableList<SnackCategoryVO>? = null
 
     private var mFoodListForPrice: ArrayList<String> = ArrayList()
     private var mSelectedFoodList = ArrayList<String>()
-    private var mSelectedSeatList:MutableList<String> = mutableListOf()
+    private var mSelectedSeatList: MutableList<String> = mutableListOf()
 
-    private lateinit var mTime:String
-    private lateinit var mMovieName: String
-
+    private lateinit var mTimeSlot: String
+    private lateinit var mMovieBookingDate: String
     private lateinit var mMovieID: String
+    private lateinit var mCinemaName:String
+    private lateinit var mCinemaStartTime:String
 
     companion object {
         const val IE_SEAT_NAME_LIST = "IE_SEAT_NAME_LIST"
-        const val IE_MOVIE_NAME = "IE_MOVIE_NAME"
-        const val IE_TIME = "IE_TIME"
+        const val IE_MOVIE_BOOKING_DATE = "IE_MOVIE_NAME"
+        const val IE_SLOT_TIME = "IE_TIME"
         const val IE_ID_FOR_CALL = "ID_FOR_CALL"
+        const val IE_CINEMA_NAME = "IE_CINEMA_NAME"
+        const val IE_CINEMA_START_TIME = "IE_CINEMA_START_TIME"
         fun newIntent(
             context: Context,
             seatNames: MutableList<String>,
-            movieNameForCheckout: String,
-            time: String,
-            mMovieID: String
+            bookingDate: String,
+            timeSlotID: String,
+            mMovieID: String,
+            cinemaName: String,
+            cinemaStartTime: String
         ): Intent {
             val intent = Intent(context, GrabBiteActivity::class.java)
             intent.putStringArrayListExtra(
@@ -57,9 +66,11 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
                 seatNames as java.util.ArrayList<String>
             )
 
-            intent.putExtra(IE_MOVIE_NAME,movieNameForCheckout)
-            intent.putExtra(IE_TIME,time)
-            intent.putExtra(IE_ID_FOR_CALL,mMovieID)
+            intent.putExtra(IE_MOVIE_BOOKING_DATE, bookingDate)
+            intent.putExtra(IE_SLOT_TIME, timeSlotID)
+            intent.putExtra(IE_ID_FOR_CALL, mMovieID)
+            intent.putExtra(IE_CINEMA_NAME,cinemaName)
+            intent.putExtra(IE_CINEMA_START_TIME,cinemaStartTime)
 
             return intent
 
@@ -73,25 +84,25 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
 //        setUpFoodTab(it)
         mSelectedSeatList = intent.getStringArrayListExtra(IE_SEAT_NAME_LIST)!!
 
-        mTime = intent.getStringExtra(IE_TIME).toString()
-        Log.i("time",mTime)
+        mTimeSlot = intent.getStringExtra(IE_SLOT_TIME).toString()
+        Log.i("time", mTimeSlot)
 
-        mMovieName = intent.getStringExtra(IE_MOVIE_NAME).toString()
-        Log.i("Name", mMovieName)
+        mMovieBookingDate = intent.getStringExtra(IE_MOVIE_BOOKING_DATE).toString()
+        Log.i("Name", mMovieBookingDate)
 
         mMovieID = intent.getStringExtra(IE_ID_FOR_CALL).toString()
+        Log.d("id", mMovieID.toString())
 
+        mCinemaName = intent.getStringExtra(IE_CINEMA_NAME).toString()
+        Log.d("cinemaName", mCinemaName.toString())
+
+        mCinemaStartTime = intent.getStringExtra(IE_CINEMA_START_TIME).toString()
 
         setUpSheet()
         setUpGrabFoodRecyclerView()
-
         requestData()
-
-
         setUpTabListeners()
         SetupListeners()
-
-
 
 
     }
@@ -174,15 +185,33 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
     private fun SetupListeners() {
 
         tvSkip.setOnClickListener {
+            for (item in mFood){
+                val vo = CheckOutBodySnack(item.id)
+                mChekOutSnack.add(vo)
+            }
+
+            val itemMap = mChekOutSnack.associateBy { it.id }. toMutableMap()
+            for (item in mChekOutSnack){
+                if (itemMap.containsKey(it.id)){
+                    val existItem = itemMap[it.id]
+                    existItem?.quantity = existItem?.quantity?.plus(1)
+                }else{
+                    itemMap[item.id] = item
+                }
+            }
+            val  updateItem = itemMap.values.toList()
             startActivity(
                 CheckOutActivity.newIntent(
                     this, isAbleToCancel = false,
                     mSelectedFoodList,
                     mFoodListForPrice,
                     mSelectedSeatList,
-                    mTime,
-                    mMovieName,
-                    mMovieID
+                    mTimeSlot,
+                    mMovieBookingDate,
+                    mMovieID,
+                    mCinemaName,
+                    mCinemaStartTime,
+                    updateItem
 
 
                 )
@@ -195,15 +224,34 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
 //        }
 
         ivForward.setOnClickListener {
+            for (item in mFood){
+                val vo = CheckOutBodySnack(item.id)
+                mChekOutSnack.add(vo)
+            }
+
+             val itemMap = mChekOutSnack.associateBy { it.id }. toMutableMap()
+            for (item in mChekOutSnack){
+                if (itemMap.containsKey(it.id)){
+                    val existItem = itemMap[it.id]
+                    existItem?.quantity = existItem?.quantity?.plus(1)
+                }else{
+                    itemMap[item.id] = item
+                }
+            }
+            val  updateItem = itemMap.values.toList()
+
             startActivity(
                 CheckOutActivity.newIntent(
                     this, false,
                     mSelectedFoodList,
                     mFoodListForPrice,
                     mSelectedSeatList,
-                    mTime,
-                    mMovieName,
-                    mMovieID
+                    mTimeSlot,
+                    mMovieBookingDate,
+                    mMovieID,
+                    mCinemaName,
+                    mCinemaStartTime,
+                    updateItem
 
                 )
             )
@@ -244,6 +292,7 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
 
     override fun onTapAdd(snackVO: SnackVO, isAddOrNot: Boolean) {
 
+
         when (isAddOrNot) {
             true -> {
                 var value = 0
@@ -251,7 +300,7 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
 
                 mSelectedFoodList.add(mFood[value].name)
                 mFoodListForPrice.add(mFood[value].price.toString())
-                value = value.inc()
+                value.inc()
 
 //                mFood.forEach {
 //                    mSelectedFoodList.add(it.name)
@@ -261,7 +310,7 @@ class GrabBiteActivity : AppCompatActivity(), SnackSelect {
                 tvFoodTotalPrice.text = "${mPriceList.sum()} Ks"
             }
             false -> {
-                mPriceList.removeLastOrNull()
+
                 mFood.removeLastOrNull()
                 tvFoodTotalPrice.text = "${mPriceList.sum()} Ks"
             }

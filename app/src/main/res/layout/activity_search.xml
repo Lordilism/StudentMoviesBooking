@@ -26,30 +26,32 @@
                     android:layout_alignParentStart="true"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_white_24dp" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivicSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:layout_toEndOf="@id/ivBtnFromSearch"
-                    app:srcCompat="@drawable/ic_baseline_search_white_24dp" />
 
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchViewMovies"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="fill"
+                    android:layout_height="?attr/actionBarSize"
                     android:layout_toStartOf="@id/ivBtnFilter"
-                    android:layout_toEndOf="@id/ivicSearch"
-                    android:focusable="true"
+                    android:layout_toEndOf="@id/ivBtnFromSearch"
+                    android:hint="Search Movies"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="@color/white"
+                    >
 
-                    app:iconifiedByDefault="false"
-                    app:queryBackground="@null"
-                    app:queryHint="Search Movie"
-                    app:searchIcon="@null" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSearchMovies"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/margin_card_medium"
+                        android:textColorHighlight="@color/white"
+                        android:drawableStart="@drawable/ic_baseline_search_white_24dp"
+                        android:background="@android:color/transparent"
+                        android:layout_gravity="center"
+                        android:drawablePadding="@dimen/margin_card_medium"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@color/white" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivBtnFilter"
@@ -69,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-        https://github.com/Lordilism/BookingMovies.git
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -78,17 +80,16 @@
                 android:id="@+id/rvSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_below="@id/llFromCinemaSearch"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:visibility="gone" />
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/margin_medium" />
 
             <LinearLayout
                 android:id="@+id/llFromCinemaSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="@dimen/margin_medium_2"
                 android:orientation="horizontal"
                 android:visibility="visible">
@@ -125,9 +126,9 @@
                 android:id="@+id/tvPriceRange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/llFromCinemaSearch"
                 android:layout_margin="@dimen/margin_medium_2"
                 android:fontFamily="@font/inter_medium"
-                android:layout_below="@id/llFromCinemaSearch"
                 android:text="Price Range"
                 android:textColor="@color/white"
                 android:visibility="gone" />

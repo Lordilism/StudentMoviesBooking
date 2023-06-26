@@ -1,16 +1,21 @@
 package com.example.moviesbookingapp.data.models
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.moviesbookingapp.data.vos.*
 import com.example.moviesbookingapp.network.dataAgents.MovieDataAgents
 import com.example.moviesbookingapp.network.dataAgents.RetrofitDataAgentImpl
+import com.example.moviesbookingapp.network.responses.LogOutResponse
 import com.example.moviesbookingapp.network.responses.OtpResponse
 import com.example.moviesbookingapp.persistence.BookingDatabase
+import com.google.gson.Gson
 
 object MovieModelImpl : MovieModel {
     private var mDatabase: BookingDatabase? = null
 
     private val mMovieDataAgents: MovieDataAgents = RetrofitDataAgentImpl
+
+    private var mMovieVO: MovieVO? = null
 
     fun initDatabase(context: Context) {
         mDatabase = BookingDatabase.getDBInstance(context)
@@ -91,8 +96,8 @@ object MovieModelImpl : MovieModel {
 
         mMovieDataAgents.getNowPlayingMovies(
             onSuccess = {
-                for (nowShowing in it) {
-                    nowShowing.type = NOW_PLAYING
+                for (movies in it) {
+                    movies.type = NOW_PLAYING
                 }
                 mDatabase?.bookingDao()?.insertMovies(it)
                 onSuccess(it)
@@ -131,9 +136,13 @@ object MovieModelImpl : MovieModel {
         movieId: String
     ) {
         mDatabase?.bookingDao()?.getMoviesById(movieId.toInt())?.let { onSuccess(it) }
+
         mMovieDataAgents.getMovieDetails(
             onSuccess = {
-                mDatabase?.bookingDao()?.getMoviesById(movieId.toInt())
+//                it.type = NOW_PLAYING
+                it.type = mMovieVO?.type.toString()
+                mMovieVO = it
+                mDatabase?.bookingDao()?.insertSingleMovies(it)
                 onSuccess(it)
             },
             onFailure = onFailure,
@@ -225,15 +234,50 @@ object MovieModelImpl : MovieModel {
         onSuccess: (TicketCheckOutVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mMovieDataAgents.getTicketCheckout(authorization,ticketCheckout,onSuccess,onFailure)
+
+        mMovieDataAgents.getTicketCheckout(authorization,ticketCheckout , onSuccess = {
+            onSuccess(it)
+        }, onFailure)
     }
 
     override fun insertTicket(ticket: TicketForDatabase) {
         mDatabase?.bookingDao()?.insertTicket(ticket)
     }
 
-    override fun getAllTickets(): List<TicketForDatabase>? {
+    override fun getAllTickets(): LiveData<List<TicketForDatabase>>? {
         return mDatabase?.bookingDao()?.getAllTickets()
+    }
+
+    override fun deleteTickets(ticketId: Int) {
+        mDatabase?.bookingDao()?.deleteTicket(ticketId)
+    }
+
+    override fun postCheckOut() {
+
+    }
+
+    override fun getMoviefromDatabase(movieId: String):MovieVO? {
+        return mDatabase?.bookingDao()?.getMoviesById(movieId.toInt())
+    }
+
+    override fun getCinemaInfo(
+        onSuccess: (List<CinemaInfoVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mMovieDataAgents.getCinemaInfo(onSuccess,onFailure)
+    }
+
+    override fun getNowPlaingMoviesFromDatabase(): List<MovieVO>? {
+        return mDatabase?.bookingDao()?.getMoviesByType(NOW_PLAYING)
+    }
+
+    override fun getComingSoonMoviesFromDatabase(): List<MovieVO>? {
+        return mDatabase?.bookingDao()?.getMoviesByType(COMING_SOON)
+    }
+
+    override fun logOut(authorization: String,onSuccess:(LogOutResponse)->Unit, onFailure: (String) -> Unit) {
+
+        mMovieDataAgents.logOut(authorization,onSuccess,onFailure)
     }
 
 

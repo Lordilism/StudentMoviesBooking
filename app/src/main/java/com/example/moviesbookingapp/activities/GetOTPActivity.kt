@@ -59,7 +59,7 @@ class GetOTPActivity : AppCompatActivity() {
             if (EnteredOTP == "123456") {
                 mMovieModel.signInOTP(
                     onSuccess = {
-                        Toast.makeText(this, it.token, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, it.token, Toast.LENGTH_SHORT).show()
 
                         startActivity(PickLocationActivity.newIntent(this))
                     },

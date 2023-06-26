@@ -11,10 +11,7 @@ import com.example.moviesbookingapp.R
 import com.example.moviesbookingapp.activities.MoviesDetailsActivity
 import com.example.moviesbookingapp.adapters.NowShowingAdapter
 import com.example.moviesbookingapp.data.models.MovieModel
-import com.example.moviesbookingapp.data.models.MovieModelImpl
-import com.example.moviesbookingapp.data.vos.MovieVO
 import com.example.moviesbookingapp.delegates.MoviesDelegate
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_now_showing.view.*
 
 
@@ -69,11 +66,11 @@ class NowShowingFragment(val mMovieModel: MovieModel) : Fragment(), MoviesDelega
     }
 
 
-    override fun onTapMovies(name: String) {
+    override fun onTapMovies(movieId: String) {
 //        Toast.makeText(this.context,name, Toast.LENGTH_LONG).show()
 
         this.context?.let {
-            startActivity(MoviesDetailsActivity.newIntent(it,name,true))
+            startActivity(MoviesDetailsActivity.newIntent(it,movieId,true))
         }
 
 //        this.view?.let { Snackbar.make(it,name,Snackbar.LENGTH_INDEFINITE).show() }

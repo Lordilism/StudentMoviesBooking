@@ -1,6 +1,8 @@
 package com.example.moviesbookingapp.data.models
 
+import androidx.lifecycle.LiveData
 import com.example.moviesbookingapp.data.vos.*
+import com.example.moviesbookingapp.network.responses.LogOutResponse
 import com.example.moviesbookingapp.network.responses.OtpResponse
 import com.example.moviesbookingapp.network.responses.SnackResponse
 
@@ -99,5 +101,19 @@ interface MovieModel {
 
     fun insertTicket(ticket:TicketForDatabase)
 
-    fun getAllTickets():List<TicketForDatabase>?
+    fun getAllTickets(): LiveData<List<TicketForDatabase>>?
+
+    fun deleteTickets(ticketId:Int)
+    fun postCheckOut()
+
+    fun getMoviefromDatabase(movieId: String): MovieVO?
+
+    fun getCinemaInfo(
+        onSuccess: (List<CinemaInfoVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getNowPlaingMoviesFromDatabase():List<MovieVO>?
+    fun getComingSoonMoviesFromDatabase():List<MovieVO>?
+    fun logOut(authorization: String,onSuccess: (LogOutResponse) -> Unit,onFailure: (String) -> Unit)
 }

@@ -23,7 +23,7 @@ class PaymentViewHolder(itemView: View, mDelegate: PaymentDelegate) : RecyclerVi
 
     init {
         itemView.setOnClickListener {
-            mDelegate.onTapPayment()
+            mDelegate.onTapPayment(mPaymentVO?.id)
         }
     }
 

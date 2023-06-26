@@ -249,7 +249,7 @@
                 android:layout_marginTop="@dimen/margin_medium_3"
                 android:backgroundTint="@color/colorAccent"
                 android:textAllCaps="false"
-                android:textColor="@color/colorSecondaryText"
+                android:textColor="@color/colorPrimary"
                 android:text="Confirm OTP"/>
 
 

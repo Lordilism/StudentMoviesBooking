@@ -1,6 +1,7 @@
 package com.example.moviesbookingapp.network.responses
 
 import com.example.moviesbookingapp.data.vos.CheckOutBody
+import com.example.moviesbookingapp.data.vos.CinemaInfoVO
 import com.example.moviesbookingapp.utils.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -45,7 +46,6 @@ interface TheMovieApi {
     @GET("$API_MOVIES_DETAILS/{movieId}")
     fun getMovieDetails(
         @Path("movieId") movieId: String
-
     ): Call<MovieDetailsResponse>
 
     @GET(API_CINEMA_TIMESLOT)
@@ -93,10 +93,20 @@ interface TheMovieApi {
     fun getCheckOut(
         @Header("Authorization")
         authorization: String,
-
         @Body checkOutTicket: CheckOutBody
 
     ):Call<CheckOutResponse>
+
+
+    @GET(API_GET_CINEMA_INFO)
+    fun getCinemaInfo(
+    ):Call<CinemaResponse>
+
+    @POST(API_LOG_OUT)
+    fun logOut(
+        @Header("Authorization")
+        authorization: String
+    ):Call<LogOutResponse>
 
 
 }

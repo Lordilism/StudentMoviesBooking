@@ -142,7 +142,7 @@
             android:layout_below="@id/llFromSeatSelect"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_medium_2"
-            android:progress="80"
+            android:progress="0"
             android:progressBackgroundTint="@color/colorSecondaryText"
             android:progressTint="@color/colorSecondaryText" />
 
@@ -152,7 +152,7 @@
             android:layout_alignTop="@id/seekBarSeat"
             android:layout_alignBottom="@id/seekBarSeat"
             android:layout_toStartOf="@id/seekBarSeat"
-            app:srcCompat="@drawable/ic_baseline_add_grey_24dp" />
+            app:srcCompat="@drawable/ic_baseline_remove_grey_24dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
             android:layout_alignTop="@id/seekBarSeat"
             android:layout_alignBottom="@id/seekBarSeat"
             android:layout_toEndOf="@id/seekBarSeat"
-            app:srcCompat="@drawable/ic_baseline_remove_grey_24dp" />
+            app:srcCompat="@drawable/ic_baseline_add_grey_24dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnBuyTickets"
@@ -192,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_medium"
-                android:text="2 tickets"
+                android:text="0 tickets"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_regular_2x"
                 android:textStyle="bold" />
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvSeatSelectedNumber"
                 android:fontFamily="@font/inter_medium"
-                android:text="17000 KS"
+                android:text="0 KS"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_regular_2x"
                 android:textStyle="bold" />

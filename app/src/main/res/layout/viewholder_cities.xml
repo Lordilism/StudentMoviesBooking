@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
+        android:padding="@dimen/margin_card_medium"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCitiesNameFromPickLocation"
@@ -22,7 +23,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/colorSecondaryText"
+            android:background="@color/color_dotted_line"
             />
     </LinearLayout>
 

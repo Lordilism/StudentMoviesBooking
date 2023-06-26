@@ -1,5 +1,6 @@
 package com.example.moviesbookingapp.persistence.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,48 +15,52 @@ interface Daos {
     fun insertInformation(otp: OtpResponse?)
 
     @Query("SELECT * FROM otp WHERE code = :code")
-    fun getInformation(code:Int):OtpResponse
+    fun getInformation(code: Int): OtpResponse
 
     @Query("SELECT * FROM city")
-    fun getCities():List<CityVo>
+    fun getCities(): List<CityVo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCities(cities:List<CityVo>)
+    fun insertCities(cities: List<CityVo>)
+
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insertCinemas(cinemas: List<>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertConfig(config: List<ConfigVO>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies:List<MovieVO>)
+    fun insertMovies(movies: List<MovieVO>)
 
     @Query("SELECT * FROM movie")
-    fun getAllMovies():List<MovieVO>
+    fun getAllMovies(): List<MovieVO>
 
     @Query("SELECT * FROM movie WHERE type = :type")
-    fun getMoviesByType(type:String):List<MovieVO>
+    fun getMoviesByType(type: String): List<MovieVO>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBanners(banners: List<BannerVO>)
 
     @Query("SELECT * FROM banner")
-    fun getBanner():List<BannerVO>?
+    fun getBanner(): List<BannerVO>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSingleMovies(movie: MovieVO)
 
     @Query("SELECT * FROM movie WHERE id = :movieId")
-    fun getMoviesById(movieId: Int):MovieVO?
+    fun getMoviesById(movieId: Int): MovieVO?
 
     @Query("SELECT * FROM config WHERE `key` = :key")
-    fun getConfig(key:String):ConfigVO
+    fun getConfig(key: String): ConfigVO
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTicket(ticket: TicketForDatabase)
 
     @Query("SELECT * FROM ticket")
-    fun getAllTickets():List<TicketForDatabase>
+    fun getAllTickets(): LiveData<List<TicketForDatabase>>
 
-
+    @Query("DELETE FROM ticket WHERE id = :ticketId")
+    fun deleteTicket(ticketId: Int)
 
 
 }
